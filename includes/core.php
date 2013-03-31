@@ -20,7 +20,7 @@ function validate_email($email){
 
 function check_login() {
   if(!isset($_SESSION['user'])) {
-    header('Location: ?page=greet');
+    header('Location: ?page=login');
     die();
   }
 }
