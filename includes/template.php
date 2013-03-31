@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 Class Template {
   public static $content;
 

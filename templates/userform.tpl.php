@@ -1,4 +1,4 @@
-<form method="post">
+﻿<form method="post">
   <legend>Regisztráció</legend>
   <?php if($errors){ ?>
     <div class="errors">

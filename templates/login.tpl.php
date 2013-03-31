@@ -1,4 +1,4 @@
-<form method="post">
+﻿<form method="post">
     <label for="inputUsername">Felhasználónév</label>
     <input type="text" id="inputUsername" name="name" /><br />
     <label for="inputPassword">Jelszó</label>

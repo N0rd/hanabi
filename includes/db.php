@@ -1,8 +1,8 @@
-<?php
+﻿<?php
 define('PASSWORD_SALT', 'as1fds35hrtt24235'); //change this on production server
-define('DB_DATA', 'mysql:host=localhost;dbname=hanabi');  //change this on production server
-define('DB_USER', 'hanabi');  //change this on production server
-define('DB_PASS', 'hanabi');  //change this on production server
+define('DB_DATA', 'mysql:host=localhost;dbname=hanabi_game');  //change this on production server
+define('DB_USER', 'hanabi_master');  //change this on production server
+define('DB_PASS', 'D1g1H4n4b1');  //change this on production server
 
 class DB{
   public static $db;

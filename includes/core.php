@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 define('DEBUG', '0');
 session_start();
 require_once('includes/db.php');
@@ -6,8 +6,8 @@ require_once('includes/template.php');
 //DEBUG Tools:
 if(DEBUG) {
   require_once('includes/krumo/class.krumo.php');
-  //require_once('includes/FirePHPCore/FirePHP.class.php');
-  //$firephp = FirePHP::init();
+  require_once('includes/FirePHPCore/FirePHP.class.php');
+  $firephp = FirePHP::init();
 }
 
 function encrypt_password($password) {
@@ -20,7 +20,7 @@ function validate_email($email){
 
 function check_login() {
   if(!isset($_SESSION['user'])) {
-    header('Location: ?page=login');
+    header('Location: ?page=greet');
     die();
   }
 }

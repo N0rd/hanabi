@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 check_login();
 include_once('includes/Game.class.php');
 include_once('includes/Deck.class.php');

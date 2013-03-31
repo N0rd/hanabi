@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 Class User {
   public $id, $name, $username, $password1, $password2, $email;
 
