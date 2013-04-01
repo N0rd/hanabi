@@ -8,7 +8,7 @@ body {
 	font: 100% Verdana, Arial, Helvetica, sans-serif;
 	margin: 0; 
 	padding: 0;
-	color: #000000;
+	color: #FFF;
 	background: #0000FF url(../images/back.jpg) repeat-x;
 }
 
@@ -70,6 +70,72 @@ body {
 #main {
 	padding: 0 20px;
 }
+
+p {
+	margin: 0 50px 10px 50px;
+}
+
+p.important {
+	color: #FC0;
+}
+
+p.example {
+	font-style: italic;
+}
+
+h3 {
+	margin: 10px 20px 10px 20px;
+	line-height: 1.3em;
+	font-size: 1.3em;
+}
+
+h4 {
+	margin: 10px 30px 10px 30px;
+	line-height: 1em;
+	font-size: 1em;
+}
+
+ul {
+	margin: 0 50px 20px 85px;
+	line-height: 1em;
+}
+
+
+ol.abc {
+	margin: 0 50px 20px 85px;
+	line-height: 1em;
+	list-style-type: lower-latin;
+}
+
+ol {
+	margin: 0 50px 20px 85px;
+	line-height: 1em;
+	list-style-type: decimal;
+}
+
+table.rules {
+	margin: 0 50px 20px 85px;
+	
+}
+
+table.rules th {
+	padding: 0 5px;
+	width: 80px;
+	text-align: right;
+	
+}
+
+table.rules td {
+	padding: 0 5px;
+	
+}
+
+
+span.nice {
+	font-weight: bold;
+	font-style: italic;
+}
+
 
 #hole { 
    padding-bottom: 50px;

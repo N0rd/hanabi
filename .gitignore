@@ -2,6 +2,6 @@ includes/db.php
 includes/krumo/*
 FirePHPCore/*
 _notes/*
-/images/_notes/*
+/*/_notes/*
 munkakepek/*
 schema.sql

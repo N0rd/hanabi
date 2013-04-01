@@ -7,9 +7,11 @@ Class Game {
   public $status;
   public $deck;
   public $lives;
+  public $variant;
   public $hints;
   public $players;
   public $playersnum;
+  public $handsize;
   public $discard;
   public function __construct($id = null) {
     if($id) {
@@ -19,20 +21,34 @@ Class Game {
       $this->id = null;
       $this->name = 'Test Game';
       $this->status = 1;
-      $this->playersnum = 3;
+	  $this->playersnum = '0';
       $this->addplayer(array('name' => 'Player 1', 'id' => 4));
       $this->addplayer(array('name' => 'Player 2', 'id' => 5));
       $this->addplayer(array('name' => 'Player 3', 'id' => 16));
+  	  $this->variant = 'normal';	  	  
     }
   }
 
   public function start() {
-    $this->deck = new Deck();
+    $this->deck = new Deck(null, $this->variant);
     $this->lives = 3;
-    $this->hints = 8;
-    $this->discard = array();
-    foreach($this->players as &$p) {
-      for($i = 0; $i < 4; $i++) {
+	//a játékvarianstól függ a sugások száma, sőt extra könnyítésként növelhető is szükség szerint.
+    if ($this->variant == 'normal') {
+		$this->hints = 8;	
+	} elseif ($this->variant == 'hard' or $this->variant == 'harder' or $this->variant == 'anti') {
+		$this->hints = 9;
+	} elseif ($this->variant == 'easy') {
+		$this->hints = 12;
+	}
+	$this->discard = array();
+	// játékoslétszámtól függ a kézben tartott lapok száma
+	if ($this->playersnum == 2 or $this->playersnum == 3) {
+		$this->handsize = 5;
+	} elseif ($this->playersnum == 4 or $this->playersnum == 5) {
+		$this->handsize = 4;
+	}
+  for($i = 0; $i < $this->handsize; $i++) {
+	  foreach($this->players as &$p) {
         $p['hand'][] = $this->deck->draw();
       }
     }
@@ -41,6 +57,7 @@ Class Game {
   public function addplayer($player) {
     //later loaded from user data
     $this->players[] = $player;
+	$this->playersnum += 1;
   }
   
   public function saveToDB() {

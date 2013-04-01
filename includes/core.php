@@ -1,5 +1,5 @@
 ﻿<?php
-define('DEBUG', '0');
+define('DEBUG', '1');
 session_start();
 require_once('includes/db.php');
 require_once('includes/template.php');
