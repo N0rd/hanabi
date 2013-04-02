@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 Class Deck {
   public static $basicColors = array(

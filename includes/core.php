@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 define('DEBUG', '1');
 session_start();
 require_once('includes/db.php');

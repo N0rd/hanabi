@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 $error = false;
 if(isset($_POST['name']) && isset($_POST['password']) ){
   $name = $_POST['name'];

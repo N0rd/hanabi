@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 include_once('includes/user.class.php');
 $user = new User();
 $errors = false;

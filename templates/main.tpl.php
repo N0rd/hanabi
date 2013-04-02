@@ -1,2 +1,2 @@
-﻿<?php
+<?php
 //krumo($game);

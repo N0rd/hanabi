@@ -1,4 +1,4 @@
-﻿<h3>BEVEZETÉS</h3>
+<h3>BEVEZETÉS</h3>
 	<p> A hanabi eredendően egy kártyajáték, rendszerünk ezt probálja leszimulálni.</p>
 	<p>A Hanabi kifejezés a japán nyelvből ered, melynek jelentése tűzvirág. A Hanabiban a játékosok bombasztikus tűzijátékot próbálnak az égre varázsolni. Ehhez mindannyian egy csapatként fognak dolgozni. A játékosoknak csak egyesült erővel sikerülhet a nézőket lenyűgözni és az isteneket megörvendeztetni.</p>
 
