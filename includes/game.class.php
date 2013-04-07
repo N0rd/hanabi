@@ -53,15 +53,15 @@ Class Game {
       $this->handsize = 4;
     }
     for($i = 0; $i < $this->handsize; $i++) {
-      foreach($this->players as &$p) {
-        $p['hand'][] = $this->deck->draw();
+      foreach($this->players as $p) {
+        $p->draw();
       }
     }
   }
   
   public function addplayer($player) {
     //later loaded from user data
-    $this->players[] = $player;
+    $this->players[] = new Player($this, $player['id'], $player['name']);
     $this->playersnum += 1;
   }
   
@@ -92,23 +92,10 @@ Class Game {
     if($insert) {
       $this->id = DB::$db->lastInsertId();
     }
-    if($insert) {
-      $query = DB::$db->prepare('INSERT INTO game_player(gameid, playerid, `order`, hand)
-                                 VALUES (:gameid, :playerid, :order, :hand)');
-      $query->bindParam(':order', $order);
-    } else {
-      //this might require tweaking later, when there will be a lobby with open games (possibly, players added or removed on update)
-      $query = DB::$db->prepare('UPDATE game_player SET hand = :hand WHERE gameid = :gameid AND playerid = :playerid');
-    }
-    $query->bindParam(':gameid', $this->id);
-    $query->bindParam(':playerid', $playerid);
-    $query->bindParam(':hand', $hand);
     $order = 0;
     foreach($this->players as $p) {
-      $playerid = $p['id'];
       $order++;
-      $hand = json_encode($p['hand']);
-      $query->execute();
+      $p->saveToDb($insert, $order);
     }
   }
 
@@ -135,11 +122,11 @@ Class Game {
       $query->bindParam(':id', $id);
       $query->execute();
       while($p = $query->fetch()) {
-        $p2['id'] = $p['playerid'];
-        $p2['hand'] = json_decode($p['hand']);
+        $hand = json_decode($p['hand']);
         //later, name will be loaded from users table
-        $p2['name'] = 'Player '.$p['playerid'];
-        $this->players[] = $p2;
+        $name = 'Player '.$p['playerid'];
+        $current = ($p['order'] == $this->currentplayer);
+        $this->players[] = new Player($this, $p['playerid'], $name, $hand, $current);
       }
       return true;
     } else {

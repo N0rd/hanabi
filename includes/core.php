@@ -1,12 +1,16 @@
 <?php
 define('DEBUG', '1');
 session_start();
-require_once('includes/db.php');
-require_once('includes/template.php');
+require('includes/db.php');
+require('includes/template.php');
+require('includes/Game.class.php');
+require('includes/Deck.class.php');
+require('includes/Player.class.php');
+
 //DEBUG Tools:
 if(DEBUG) {
-  require_once('includes/krumo/class.krumo.php');
-  require_once('includes/FirePHPCore/FirePHP.class.php');
+  require('includes/krumo/class.krumo.php');
+  require('includes/FirePHPCore/FirePHP.class.php');
   $firephp = FirePHP::init();
 }
 

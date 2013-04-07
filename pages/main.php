@@ -1,8 +1,5 @@
 <?php
 check_login();
-include_once('includes/Game.class.php');
-include_once('includes/Deck.class.php');
-
 $game = new Game();
 $game->start();
 krumo($game);
