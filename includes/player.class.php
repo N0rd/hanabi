@@ -5,21 +5,23 @@ Class Player {
   public $id; 
   public $hand;
   public $name;
+  public $playerplace;
   public $current;
   
-  public function __construct($game, $id, $name, $hand = array(), $current = false) {
+  public function __construct($game, $id, $name, $playerplace, $hand = array(), $current = false) {
     $this->game = $game;
     $this->id = $id;
     $this->hand = $hand;
     $this->name = $name;
+    $this->playerplace = $playerplace;
     $this->current = $current;
   }
   
-  public function saveToDb($insert, $order) {
+  public function saveToDb($insert) {
     if($insert) {
       $query = DB::$db->prepare('INSERT INTO game_player(gameid, playerid, `order`, hand)
                                  VALUES (:gameid, :playerid, :order, :hand)');
-      $query->bindParam(':order', $order);
+      $query->bindParam(':order', $this->playerplace);
     } else {
       //this might require tweaking later, when there will be a lobby with open games (possibly, players added or removed on update)
       $query = DB::$db->prepare('UPDATE game_player SET hand = :hand WHERE gameid = :gameid AND playerid = :playerid');
@@ -65,4 +67,17 @@ Class Player {
     $this->game->buildPile($card);
     $this->draw();
   }
+  
+  public function hint($playerplace, $hint) {
+    if($playerplace != $this->playerplace) {
+      $this->game->players[$playerplace]->receiveHint($hint);
+      return true;
+    }
+    return false;
+  }
+  
+  public function receiveHint($hint) {
+    //later
+  }
+  
 }

@@ -63,9 +63,11 @@ Class Game {
     }
   }
   
-  public function addplayer($player) {
-    //later loaded from user data
-    $this->players[] = new Player($this, $player['id'], $player['name']);
+  public function addplayer($player, $playerplace = null) {
+    if($playerplace == null) {
+      $playerplace = count($this->players);
+    }
+    $this->players[] = new Player($this, $player['id'], $player['name'], $playerplace);
     $this->playersnum += 1;
   }
   
@@ -96,10 +98,8 @@ Class Game {
     if($insert) {
       $this->id = DB::$db->lastInsertId();
     }
-    $order = 0;
     foreach($this->players as $p) {
-      $order++;
-      $p->saveToDb($insert, $order);
+      $p->saveToDb($insert);
     }
   }
 
@@ -130,7 +130,7 @@ Class Game {
         //later, name will be loaded from users table
         $name = 'Player '.$p['playerid'];
         $current = ($p['order'] == $this->currentplayer);
-        $this->players[] = new Player($this, $p['playerid'], $name, $hand, $current);
+        $this->players[] = new Player($this, $p['playerid'], $name, $p['order'], $hand, $current);
       }
       return true;
     } else {
