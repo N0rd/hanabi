@@ -60,7 +60,7 @@ Class Deck {
   
   public $cards; 
   
-  public function __construct($cards = null, $variant) {
+  public function __construct($cards = null, $variant = 'normal') {
     if($cards) {
       $this->cards = $cards;
     } else {

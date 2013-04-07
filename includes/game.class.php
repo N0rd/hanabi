@@ -56,7 +56,7 @@ Class Game {
   public function addplayer($player) {
     //later loaded from user data
     $this->players[] = $player;
-	$this->playersnum += 1;
+    $this->playersnum += 1;
   }
   
   public function saveToDB() {
@@ -65,14 +65,16 @@ Class Game {
     $data['lives'] = $this->lives;
     $data['hints'] = $this->hints;
     $data['discard'] = $this->discard;
+    $data['variant'] = $this->variant;
     $data = json_encode($data);
     if($this->id) {
       $insert = false;
-      //update
+      $query = DB::$db->prepare('UPDATE games SET name = :name, status = :status, playersnum = :playersnum, data = :data WHERE id = :id');
+      $query->bindParam(':id', $this->id);
     } else {
       $insert = true;
-      $query = DB::$db->prepare("INSERT INTO games(name, status, playersnum, data, created)
-                                 VALUES (:name, :status, :playersnum, :data, NOW())");
+      $query = DB::$db->prepare('INSERT INTO games(name, status, playersnum, data, created)
+                                 VALUES (:name, :status, :playersnum, :data, NOW())');
     }
     $query->bindParam(':name', $this->name);
     $query->bindParam(':status', $this->status);
@@ -83,11 +85,12 @@ Class Game {
       $this->id = DB::$db->lastInsertId();
     }
     if($insert) {
-      $query = DB::$db->prepare("INSERT INTO game_player(gameid, playerid, `order`, hand)
-                                 VALUES (:gameid, :playerid, :order, :hand)");
+      $query = DB::$db->prepare('INSERT INTO game_player(gameid, playerid, `order`, hand)
+                                 VALUES (:gameid, :playerid, :order, :hand)');
       $query->bindParam(':order', $order);
     } else {
-      $query = DB::$db->prepare("UPDATE game_player SET hand = :hand WHERE gameid = :gameid AND playerid = :playerid");
+      //this might require tweaking later, when there will be a lobby with open games (possibly, players added or removed on update)
+      $query = DB::$db->prepare('UPDATE game_player SET hand = :hand WHERE gameid = :gameid AND playerid = :playerid');
     }
     $query->bindParam(':gameid', $this->id);
     $query->bindParam(':playerid', $playerid);
@@ -102,7 +105,7 @@ Class Game {
   }
 
   public function loadFromDB($id) {
-    $query = DB::$db->prepare("SELECT * FROM games WHERE id = :id");
+    $query = DB::$db->prepare('SELECT * FROM games WHERE id = :id');
     $query->bindParam(':id', $id);
     $query->execute();
     if($game = $query->fetch()) {
@@ -110,11 +113,21 @@ Class Game {
       $this->name = $game['name'];
       $this->status = $game['status'];
       $data = json_decode($game['data']);
-      $this->deck = new Deck($data->deck);
       $this->lives = $data->lives;
       $this->hints = $data->hints;
-      $this->players = $data->players;
+      $this->variant = $data->variant;
       $this->discard = $data->discard;
+      $this->deck = new Deck($data->deck, $this->variant);
+      $query = DB::$db->prepare('SELECT * FROM game_player WHERE gameid = :id ORDER BY `order`');
+      $query->bindParam(':id', $id);
+      $query->execute();
+      while($p = $query->fetch()) {
+        $p2['id'] = $p['playerid'];
+        $p2['hand'] = json_decode($p['hand']);
+        //later, name will be loaded from players table
+        $p2['name'] = 'Player '.$p['playerid'];
+        $this->players[] = $p2;
+      }
       return true;
     } else {
       return false;
