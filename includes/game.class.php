@@ -15,6 +15,7 @@ Class Game {
   public $deck;
   public $builtpiles;
   public $discard;
+  
   public function __construct($id = null) {
     if($id) {
       $this->loadFromDB($id);
@@ -32,7 +33,7 @@ Class Game {
       $this->colors = Deck::getColorsByVariant($this->variant);
     }
   }
-
+  
   public function start() {
     $this->deck = new Deck(null, $this->variant);
     $this->lives = 3;
@@ -45,7 +46,10 @@ Class Game {
       $this->hints = 12;
     }
     $this->discard = array();
-    $this->builtpiles = array();
+    
+    foreach($this->colors as $cid => $c) {
+      $this->builtpiles[$cid] = 0;
+    }
     // játékoslétszámtól függ a kézben tartott lapok száma
     if ($this->playersnum == 2 or $this->playersnum == 3) {
       $this->handsize = 5;
@@ -115,7 +119,7 @@ Class Game {
       $this->hints = $game['hints'];
       $deck = json_decode($game['deck']);
       $this->deck = new Deck($deck);
-      $this->builtpiles = json_decode($game['builtpiles']);
+      $this->builtpiles = get_object_vars(json_decode($game['builtpiles']));
       $this->discard = json_decode($game['discard']);
       $this->colors = Deck::getColorsByVariant($this->variant);
       $query = DB::$db->prepare('SELECT * FROM game_player WHERE gameid = :id ORDER BY `order`');
@@ -136,5 +140,25 @@ Class Game {
   
   public function addToDiscard($card) {
     $this->discard[] = $card;
+  }
+  
+  public function buildPile($card) {
+    $cid = Deck::getCardColor($card);
+    $number = Deck::getCardNumber($card);
+    if($this->builtpiles[$cid] == $number-1) {
+      $this->builtpiles[$cid] = $number;  
+      return true;
+    } else {
+      $this->addToDiscard($card);
+      $this->loseLife();
+      return false;
+    }
+  }
+  
+  public function loseLife() {
+    $this->lives--;
+    if($this->lives < 1) {
+      //Game Over
+    }
   }
 }

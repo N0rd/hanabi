@@ -40,16 +40,9 @@ Class Player {
     }
     return false;
   }
-  
-  public function discard($cardplace) {
-    $card = $this->hand[$cardplace];
-    unset($this->hand[$cardplace]);
-    $this->game->addToDiscard($card);
-    $this->draw();
-  }
-  
+
+  //rearrange the hand indexes to 0..<handsize>  
   private function reorder() {
-    //rearrange the hand indexes to 0..<handsize>
     $new = array();
     $key = 0;
     foreach($this->hand as $c) {
@@ -57,5 +50,19 @@ Class Player {
       $key++;
     }
     $this->hand = $new;
+  }
+  
+  public function discard($cardplace) {
+    $card = $this->hand[$cardplace];
+    unset($this->hand[$cardplace]);
+    $this->game->addToDiscard($card);
+    $this->draw();
+  }
+    
+  public function build($cardplace) {
+    $card = $this->hand[$cardplace];
+    unset($this->hand[$cardplace]);
+    $this->game->buildPile($card);
+    $this->draw();
   }
 }

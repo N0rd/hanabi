@@ -40,6 +40,14 @@ Class Deck {
     return $colors;
   }
 
+  public static function getCardColor($card) {
+    return substr($card, 0, 1);
+  }
+
+  public static function getCardNumber($card) {
+    return substr($card, 1, 1);
+  }
+  
   public static $numbers = array(
     1 => 3,
     2 => 2,
