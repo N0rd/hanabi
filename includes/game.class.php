@@ -52,8 +52,8 @@ Class Game {
     } elseif ($this->playersnum == 4 or $this->playersnum == 5) {
       $this->handsize = 4;
     }
-    for($i = 0; $i < $this->handsize; $i++) {
-      foreach($this->players as $p) {
+    foreach($this->players as $p) {
+      for($i = 0; $i < $this->handsize; $i++) {
         $p->draw();
       }
     }
@@ -132,5 +132,9 @@ Class Game {
     } else {
       return false;
     }
+  }
+  
+  public function addToDiscard($card) {
+    $this->discard[] = $card;
   }
 }

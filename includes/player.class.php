@@ -30,11 +30,32 @@ Class Player {
     $query->bindParam(':hand', $hand);
     $query->execute();
   }
+  
   public function draw() {
     if(count($this->hand) < $this->game->handsize) {
       $this->hand[] = $this->game->deck->draw();
+      $this->reorder();
+      
       return true;
     }
     return false;
+  }
+  
+  public function discard($cardplace) {
+    $card = $this->hand[$cardplace];
+    unset($this->hand[$cardplace]);
+    $this->game->addToDiscard($card);
+    $this->draw();
+  }
+  
+  private function reorder() {
+    //rearrange the hand indexes to 0..<handsize>
+    $new = array();
+    $key = 0;
+    foreach($this->hand as $c) {
+      $new[$key] = $c;
+      $key++;
+    }
+    $this->hand = $new;
   }
 }
