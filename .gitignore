@@ -1,7 +1,6 @@
 includes/db.php
 includes/krumo/*
-FirePHPCore/*
+includes/FirePHPCore/*
 _notes/*
 /*/_notes/*
 munkakepek/*
-schema.sql
