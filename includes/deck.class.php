@@ -48,6 +48,10 @@ Class Deck {
     return substr($card, 1, 1);
   }
   
+  public static function getMaxNumber() {
+    return count($numbers);
+  }
+  
   public static $numbers = array(
     1 => 3,
     2 => 2,

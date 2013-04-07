@@ -11,6 +11,7 @@ Class Game {
   public $players;
   public $currentplayer;
   public $lives;
+  public $maxhints;
   public $hints;
   public $deck;
   public $builtpiles;
@@ -31,20 +32,14 @@ Class Game {
       $this->addplayer(array('name' => 'Player 3', 'id' => 16));
   	  $this->variant = 'normal';
       $this->colors = Deck::getColorsByVariant($this->variant);
+      $this->getMaxHints();
+      $this->hints = $this->maxhints;
     }
   }
   
   public function start() {
     $this->deck = new Deck(null, $this->variant);
     $this->lives = 3;
-    //a játékvarianstól függ a sugások száma, sőt extra könnyítésként növelhető is szükség szerint.
-    if ($this->variant == 'normal') {
-      $this->hints = 8;	
-    } elseif ($this->variant == 'hard' or $this->variant == 'harder' or $this->variant == 'anti') {
-      $this->hints = 9;
-    } elseif ($this->variant == 'easy') {
-      $this->hints = 12;
-    }
     $this->discard = array();
     
     foreach($this->colors as $cid => $c) {
@@ -122,6 +117,7 @@ Class Game {
       $this->builtpiles = get_object_vars(json_decode($game['builtpiles']));
       $this->discard = json_decode($game['discard']);
       $this->colors = Deck::getColorsByVariant($this->variant);
+      $this->getMaxHints();
       $query = DB::$db->prepare('SELECT * FROM game_player WHERE gameid = :id ORDER BY `order`');
       $query->bindParam(':id', $id);
       $query->execute();
@@ -155,7 +151,10 @@ Class Game {
     $cid = Deck::getCardColor($card);
     $number = Deck::getCardNumber($card);
     if($this->builtpiles[$cid] == $number-1) {
-      $this->builtpiles[$cid] = $number;  
+      $this->builtpiles[$cid] = $number;
+      if($number == Deck::getMaxNumber()) {
+        $this->increaseHints();
+      }
       return true;
     } else {
       $this->addToDiscard($card);
@@ -176,5 +175,30 @@ Class Game {
     if($this->currentplayer >= $this->playersnum) {
       $this->currentplayer = 0;
     }
+  }
+  
+  public function getMaxHints() {
+    //a játékvarianstól függ a sugások száma, sőt extra könnyítésként növelhető is szükség szerint.
+    if ($this->variant == 'normal') {
+      $this->maxhints = 8;	
+    } elseif ($this->variant == 'hard' or $this->variant == 'harder' or $this->variant == 'anti') {
+      $this->maxhints = 9;
+    } elseif ($this->variant == 'easy') {
+      $this->maxhints = 12;
+    }
+  }
+  
+  public function increaseHints() {
+    if($this->hints < $this->maxhints) {
+      $this->hints++;
+    }
+  }
+  
+  public function decreaseHints() {
+    if($this->hints > 0) {
+      $this->hints--;
+      return true;
+    }
+    return false;
   }
 }

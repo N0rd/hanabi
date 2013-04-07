@@ -72,6 +72,7 @@ Class Player {
     unset($this->hand[$cardplace]);
     $this->game->addToDiscard($card);
     $this->draw();
+    $this->game->increaseHints();
     return true;  
   }
     
@@ -84,8 +85,10 @@ Class Player {
   
   private function hint($playerplace, $hint) {
     if($playerplace != $this->playerplace) {
-      $this->game->players[$playerplace]->receiveHint($hint);
-      return true;
+      if($this->game->decreaseHints()) {
+        $this->game->players[$playerplace]->receiveHint($hint);
+        return true;
+      }
     }
     return false;
   }
