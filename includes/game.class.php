@@ -1,17 +1,16 @@
 <?php
 
 Class Game {
-  
   public $id;
   public $name;
   public $status;
-  public $deck;
-  public $lives;
   public $variant;
-  public $hints;
-  public $players;
-  public $playersnum;
   public $handsize;
+  public $playersnum;
+  public $players;
+  public $lives;
+  public $hints;
+  public $deck;
   public $discard;
   public function __construct($id = null) {
     if($id) {
@@ -21,7 +20,7 @@ Class Game {
       $this->id = null;
       $this->name = 'Test Game';
       $this->status = 1;
-	  $this->playersnum = '0';
+      $this->playersnum = '0';
       $this->addplayer(array('name' => 'Player 1', 'id' => 4));
       $this->addplayer(array('name' => 'Player 2', 'id' => 5));
       $this->addplayer(array('name' => 'Player 3', 'id' => 16));
@@ -65,21 +64,41 @@ Class Game {
     $data['deck'] = $this->deck->cards;
     $data['lives'] = $this->lives;
     $data['hints'] = $this->hints;
-    $data['players'] = $this->players;
     $data['discard'] = $this->discard;
     $data = json_encode($data);
     if($this->id) {
+      $insert = false;
       //update
     } else {
+      $insert = true;
       $query = DB::$db->prepare("INSERT INTO games(name, status, playersnum, data, created)
-        VALUES (:name, :status, :playersnum, :data, NOW())");
+                                 VALUES (:name, :status, :playersnum, :data, NOW())");
     }
     $query->bindParam(':name', $this->name);
     $query->bindParam(':status', $this->status);
     $query->bindParam(':playersnum', $this->playersnum);
     $query->bindParam(':data', $data);
     $query->execute();
-    $this->id = DB::$db->lastInsertId();
+    if($insert) {
+      $this->id = DB::$db->lastInsertId();
+    }
+    if($insert) {
+      $query = DB::$db->prepare("INSERT INTO game_player(gameid, playerid, `order`, hand)
+                                 VALUES (:gameid, :playerid, :order, :hand)");
+      $query->bindParam(':order', $order);
+    } else {
+      $query = DB::$db->prepare("UPDATE game_player SET hand = :hand WHERE gameid = :gameid AND playerid = :playerid");
+    }
+    $query->bindParam(':gameid', $this->id);
+    $query->bindParam(':playerid', $playerid);
+    $query->bindParam(':hand', $hand);
+    $order = 0;
+    foreach($this->players as $p) {
+      $playerid = $p['id'];
+      $order++;
+      $hand = json_encode($p['hand']);
+      $query->execute();
+    }
   }
 
   public function loadFromDB($id) {
