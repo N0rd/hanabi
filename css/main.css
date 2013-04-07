@@ -1,0 +1,150 @@
+@charset "utf-8";
+
+.element {
+	margin-left: 30px;
+}
+
+#own {
+	float: left;
+	width: 450px;
+	height: 260px;
+	text-align: center;
+}
+
+.owncard {
+	display: block;
+	border: 2px solid #666;
+	width: 80px;
+	line-height: 10px;
+	padding: 0px;
+	float: left;
+	margin: 3px;
+}
+
+.memo {
+	width: 25px;
+	height: 25px;
+	padding: 2px 5px;
+}
+
+#board {
+	float: left;
+	width: 540px;
+	height: 260px;
+}
+
+#hints {
+	float: left;	
+	width: 360px;
+}
+
+#lives {
+	float: left;
+	width: 120px;
+	padding: 0 30px;
+}
+
+.cardplace, .cardtrash, .cardhand {
+	display: block;
+	border: 2px solid #666;
+	height: 35px;
+	width: 80px;
+	line-height: 35px;
+	font-size: 35px;
+	text-align: center;
+	padding: 40px 0;
+	float: left;
+	margin: 3px 3px 3px;
+}
+
+.markergood, .markerbad {
+	display: block;
+	border: 2px solid #666;
+	height: 30px;
+	width: 30px;
+	line-height: 30px;
+	font-size: 14px;
+	padding: 6px 0;
+	margin: 3px;
+	text-align: center;	
+	float: left;
+	background-color: #DDD;
+}
+
+#trash {
+	width: 320px;
+	padding: 0 0 0 60px;
+	height: 260px;
+	float: left;
+	overflow: hidden;
+}
+
+#discardwhite, #discardgreen, #discardyellow, #discardblue, #discardpurple {
+	clear: both;
+}
+
+#discardwhite > img, #discardgreen > img, #discardyellow > img, #discardblue > img, #discardpurple > img {
+	margin-top: -110px;
+}
+
+.cardtrash {
+	line-height: 16px;
+	font-size: 16px;
+	padding: 5px 0px 95px 5px;
+	text-align: left;
+	margin: 3px 3px 3px -60px;
+}
+#linebrake {
+	clear: both;	
+}
+
+#logandchat {
+	background-color: #EEE;
+	float: left;
+	width: 450px;
+	height: 2000px;
+	
+}
+
+#secound, #third, #fourth, #fifth {
+	float: left;
+	width: 300px;
+	padding-left: 80px;
+	height: 180px;
+}
+
+.cardhand {
+	text-align: left;
+	padding-left: 10px;
+	width: 70px;
+	margin: 3px 3px 3px -40px;
+}
+
+.R {
+	background-color: #F00;
+}
+
+.W {
+	background-color: #FFF;
+}
+
+.G {
+	background-color: #0F0;
+}
+
+.Y {
+	background-color: #FF0;
+}
+
+.B {
+	background-color: #00F;
+}
+
+.P {
+	background-color: #F0F;
+}
+
+
+#card15, .markerbad, .P {
+	visibility: hidden;
+}

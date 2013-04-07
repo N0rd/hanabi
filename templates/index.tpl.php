@@ -4,20 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Digitális Hanabi</title>
 <link href="css/hanabi.css" rel="stylesheet" type="text/css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="css/hanabi.js"></script>
 </head>
 <body>
-    <div id="container">
+	<div id="container">
 		<div id="header">
-            <img id="headImg" src="images/header.gif" alt="Hanabi"/>
-            <!--form method="post" id="quickLogin" onreset="emptyQL()">
-                <input type="text" id="qName" name="name" onclick="qNameClick()" /><br  />
-                <input type="password" id="qPass" name="password" onclick="qPassClick()" /><br  />
-                <button type="submit" >Belépés</button><br />
-              	<?php if($error): ?>
-              		<div class="error">Ez a név és jelszó nálunk nem szerepel!</div>
-            	<?php endif; ?>
-			</form><!-- #quickLogin -->
+    	<img id="headImg" src="images/header.gif" alt="Hanabi"/>
             <ul id="menu">
             	<li class="<?php echo ($page=='greet') ? 'menuSelected' : 'menuItem'; ?>">
                 	<a href="index.php?page=greet">Főoldal</a>
@@ -37,15 +30,14 @@
             	<li class="<?php echo ($page=='rules') ? 'menuSelected' : 'menuItem'; ?>">
                 	<a href="index.php?page=rules">Szabályok</a>
                 </li>
-            </ul><!-- #menu -->
-        </div><!-- #header -->
-        <div id="main">
-           	<?php echo Template::$content ?>
-   	        <div id="hole">&nbsp;</div><!-- #hole -->        
-        </div><!-- #main -->
-        <div id="footer">
-            <span class="lablec" onclick="newWindow()">Lábléc</span>
-        </div><!-- #footer -->
-	</div><!-- #container -->
+            </ul>
+		</div>
+    <div id="main">
+    	<?php echo Template::$content ?>
+    </div>
+    <div id="footer">
+    	<span class="lablec" onclick="newWindow()">Lábléc</span>
+    </div>
+	</div>
 </body>
 </html>
