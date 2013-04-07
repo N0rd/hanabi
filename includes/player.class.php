@@ -54,21 +54,35 @@ Class Player {
     $this->hand = $new;
   }
   
-  public function discard($cardplace) {
+  public function action($action, $param1, $param2) {
+    if($action == 'discard') {
+      return $this->discard($param1);
+    }
+    if($action == 'build') {
+      return $this->build($param1);
+    }
+    if($action == 'hint') {
+      return $this->hint($param1, $param2);
+    }
+    return false;
+  }
+  
+  private function discard($cardplace) {
     $card = $this->hand[$cardplace];
     unset($this->hand[$cardplace]);
     $this->game->addToDiscard($card);
     $this->draw();
+    return true;  
   }
     
-  public function build($cardplace) {
+  private function build($cardplace) {
     $card = $this->hand[$cardplace];
     unset($this->hand[$cardplace]);
-    $this->game->buildPile($card);
     $this->draw();
+    return $this->game->buildPile($card);
   }
   
-  public function hint($playerplace, $hint) {
+  private function hint($playerplace, $hint) {
     if($playerplace != $this->playerplace) {
       $this->game->players[$playerplace]->receiveHint($hint);
       return true;

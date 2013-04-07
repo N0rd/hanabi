@@ -138,6 +138,15 @@ Class Game {
     }
   }
   
+  public function action($action, $param1 = null, $param2 = null) {
+    if($_SESSION['user']['id'] != $this->players[$this->currentplayer]->id) {
+      //disabled for initial testing
+      //return false;
+    }
+    $this->players[$this->currentplayer]->action($action, $param1, $param2);
+    $this->nextPlayer();
+  }
+  
   public function addToDiscard($card) {
     $this->discard[] = $card;
   }
@@ -159,6 +168,13 @@ Class Game {
     $this->lives--;
     if($this->lives < 1) {
       //Game Over
+    }
+  }
+  
+  public function nextPlayer() {
+    $this->currentplayer++;
+    if($this->currentplayer >= $this->playersnum) {
+      $this->currentplayer = 0;
     }
   }
 }
