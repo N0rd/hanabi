@@ -23,23 +23,21 @@ Class Deck {
       'color' => '#FFFFFF',
     ),
   );
-  //Piros, 
 
-  public $colors = array();
-  
-  public function setVariant($variant) {
-	  $this->colors = Deck::$basicColors;
+  public static function getColorsByVariant($variant) {
+	  $colors = Deck::$basicColors;
 	  if ($variant == 'hard' or $variant == 'harder') {
 		  // plusz 1 szin a maga 10 lapjával ez a kártyapakliban a szivárvány, de itt lehet csak egy 6. szin simán
-		  $this->colors['P'] = array(	'name' => 'Lila',
+		  $colors['P'] = array(	'name' => 'Lila',
 								        'color' => '#FF00FF'
 							         );
 	  } elseif ($variant == 'anti') {
 		  // Ilyenkor a szivárvány szín egy szívatós anti-joker, amire minden színnél rá kell mutatni, de hiba ha bárhova lerakod...
-		  $this->colors['J'] = array( 'name' => 'Szivárvány',
+		  $colors['J'] = array( 'name' => 'Szivárvány',
 								      'color' => '#000000'
 							         );
 	  }
+    return $colors;
   }
 
   public static $numbers = array(
@@ -64,19 +62,25 @@ Class Deck {
     if($cards) {
       $this->cards = $cards;
     } else {
-      $this->setVariant($variant);
       $this->build($variant);
     }
   }
   
   public function build($variant) {
-    $this->cards = array();
-	foreach($this->colors as $cid => $c) {
-	  $num = Deck::$numbers;
-	  if ($variant == 'harder' and $cid == 'P') {
-		$num = Deck::$numbersHarder;
-	  }
-	  foreach($num as $n => $p) {
+  $this->cards = array();
+	$colors = Deck::getColorsByVariant($variant);
+  if ($variant == 'harder') {
+    $num = Deck::$numbersHarder;
+  } else {
+    $num = Deck::$numbers;
+  }
+  foreach($colors as $cid => $c) {
+    if ($variant == 'harder' && $cid == 'P') {
+      $num = Deck::$numbersHarder;
+    } else {
+      $num = Deck::$numbers;
+    }
+    foreach($num as $n => $p) {
         for($i = 1; $i <= $p; $i++) {
           $this->cards[] = $cid.$n;
         }

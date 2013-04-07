@@ -5,6 +5,7 @@ Class Game {
   public $name;
   public $status;
   public $variant;
+  public $colors;
   public $handsize;
   public $playersnum;
   public $players;
@@ -24,7 +25,8 @@ Class Game {
       $this->addplayer(array('name' => 'Player 1', 'id' => 4));
       $this->addplayer(array('name' => 'Player 2', 'id' => 5));
       $this->addplayer(array('name' => 'Player 3', 'id' => 16));
-  	  $this->variant = 'normal';	  	  
+  	  $this->variant = 'normal';
+      $this->colors = Deck::getColorsByVariant($this->variant);
     }
   }
 
@@ -116,8 +118,9 @@ Class Game {
       $this->lives = $data->lives;
       $this->hints = $data->hints;
       $this->variant = $data->variant;
+      $this->colors = Deck::getColorsByVariant($this->variant);
       $this->discard = $data->discard;
-      $this->deck = new Deck($data->deck, $this->variant);
+      $this->deck = new Deck($data->deck);
       $query = DB::$db->prepare('SELECT * FROM game_player WHERE gameid = :id ORDER BY `order`');
       $query->bindParam(':id', $id);
       $query->execute();
