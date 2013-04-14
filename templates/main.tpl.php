@@ -74,20 +74,20 @@
 			<img class="cardplace P" src="images/cards/P0.jpg" alt="0" />
 		</div>
 		<div id="hints"><h2 class="element">Súgások</h2>
-			<img class="markergood" src="images/cards/hint1.jpg" alt="+" />
-			<img class="markergood" src="images/cards/hint1.jpg" alt="+" />
-			<img class="markergood" src="images/cards/hint1.jpg" alt="+" />
-			<img class="markergood" src="images/cards/hint1.jpg" alt="+" />
-			<img class="markergood" src="images/cards/hint1.jpg" alt="+" />
-			<img class="markergood" src="images/cards/hint1.jpg" alt="+" />
-			<img class="markerbad" src="images/cards/hint0.jpg" alt="-" />
-			<img class="markerbad" src="images/cards/hint0.jpg" alt="-" />
-			<img class="markerbad" src="images/cards/hint0.jpg" alt="-" />
+			<img class="marker" src="images/hint.gif" alt="+" />
+			<img class="marker" src="images/hint.gif" alt="+" />
+			<img class="marker" src="images/hint.gif" alt="+" />
+			<img class="marker" src="images/hint.gif" alt="+" />
+			<img class="marker" src="images/hint.gif" alt="+" />
+			<img class="marker" src="images/hint.gif" alt="+" />
+			<img class="marker" src="images/hintused.gif" alt="-" />
+			<img class="marker" src="images/hintused.gif" alt="-" />
+			<img class="marker" src="images/hintused.gif" alt="-" />
 		</div>	
 		<div id="lives"><h2 class="element">Életek</h2>
-			<img class="markergood" src="images/cards/lifetrue.jpg" alt="&nbsp;" />
-			<img class="markergood" src="images/cards/lifetrue.jpg" alt="&nbsp;" />
-			<img class="markerbad" src="images/cards/lifelost.jpg" alt="X" />
+			<img class="marker" src="images/lifeis.jpg" alt="&nbsp;" />
+			<img class="marker" src="images/lifeis.jpg" alt="&nbsp;" />
+			<img class="marker" src="images/lifelost.jpg" alt="X" />
 		</div>
 	</div>			
 	<div id="trash"><h2 class="element">Kuka</h2>
@@ -112,7 +112,7 @@
 		</div>
 		<div id="discardblue">
 			<img class="cardtrash B" src="images/cards/B3.jpg" alt="3" />
-			<img class="cardtrash B" src="images/cards/B4.jpg" alt="4" />
+			<img class="cardtrash B" src="images/cards/B1.jpg" alt="1" />
 		</div>
 		<div id="discardpurple">
 			<img class="cardtrash P" src="images/cards/P3.jpg" alt="2" />
@@ -129,20 +129,21 @@
 		<img class="cardhand R" src="images/cards/R2.jpg" alt="2" />
 		<img class="cardhand B" src="images/cards/B3.jpg" alt="5" />
 		<img class="cardhand W" src="images/cards/W4.jpg" alt="4" />
-		<img class="cardhand W" src="images/cards/W4.jpg" alt="4" />
+		<img class="cardhand Y" src="images/cards/Y4.jpg" alt="4" />
 	</div>
 	<div id="fourth"><h2 class="element">Player4</h2>
-		<img class="cardhand B" src="images/cards/B3.jpg" alt="3" />
 		<img class="cardhand R" src="images/cards/R2.jpg" alt="2" />
 		<img class="cardhand Y" src="images/cards/Y3.jpg" alt="3" />
 		<img class="cardhand G" src="images/cards/G4.jpg" alt="4" />
+		<img class="cardhand B" src="images/cards/B3.jpg" alt="3" />
+        
 	</div>
 	<div id="third"><h2 class="element">Player3</h2>
 		<img class="cardhand B" src="images/cards/B3.jpg" alt="3" />
 		<img class="cardhand R" src="images/cards/R2.jpg" alt="2" />
 		<img class="cardhand Y" src="images/cards/Y3.jpg" alt="3" />
-		<img class="cardhand G" src="images/cards/G2.jpg" alt="2" />
 		<img class="cardhand W" src="images/cards/W1.jpg" alt="1" />
+		<img class="cardhand G" src="images/cards/G2.jpg" alt="2" />       
 	</div>
 	<div id="fifth"><h2 class="element">Player5</h2>
 		<img class="cardhand B" src="images/cards/B1.jpg" alt="1" />

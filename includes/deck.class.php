@@ -49,7 +49,7 @@ Class Deck {
   }
   
   public static function getMaxNumber() {
-    return count($numbers);
+    return count(Deck::$numbers);
   }
   
   public static $numbers = array(
