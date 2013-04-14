@@ -20,4 +20,11 @@ $game3->action('build',1);
 krumo($game3);
 $game3->saveToDb();
 
+function hinthelp() {
+	echo ('1., 3.');
+	return;
+}
+
+
+
 Template::$content = Template::renderTemplate('main', array('game' => $game));

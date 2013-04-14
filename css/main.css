@@ -1,14 +1,15 @@
 @charset "utf-8";
 
 .element {
-	margin-left: 30px;
+	margin: 20px 0 10px 30px;
 }
 
 #own {
 	float: left;
-	width: 450px;
+	width: 470px;
 	height: 260px;
 	text-align: center;
+	margin-right: 20px;
 }
 
 .owncard {
@@ -20,19 +21,70 @@
 	float: left;
 	margin: 3px;
 	border-radius: 10px;
-
 }
 
 .memo {
 	width: 25px;
 	height: 25px;
-	padding: 2px 5px;
+	padding: 0 5px;
+}
+
+#actions {
+	height: 100px;
+	float: left;
+}
+
+.showhints {
+	display: block;
+	float: left;
+	height: 160px;
+	width: 450px;	
+}
+
+.toplayer {
+	display: block;
+	margin: 10px auto;
+	height: 25px;
+	width: 120px;
+}
+
+#hintcolors, #hintnumbers {
+	float: left;
+	width: 200px;
+	text-align: left;
+}
+
+.hintcolor, .hintnumber {
+	width: 50px;
+
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.displaynone {
+	display: none;		
+}
+
+.select {
+	display: inline;
+	height: 20px;
+	width: 90px;
+	float: left;
+}
+
+.action {
+	height: 30px;
+	width: 80px;
+	margin: 5px;	
 }
 
 #board {
 	float: left;
-	width: 540px;
+	width: 560px;
 	height: 260px;
+	margin-right: 20px;
 }
 
 #hints {
@@ -97,7 +149,8 @@
 	text-align: left;
 	margin: 3px 3px 3px -55px;
 }
-#linebrake {
+
+.linebrake {
 	clear: both;	
 }
 
@@ -105,7 +158,8 @@
 	background-color: #EEE;
 	float: left;
 	width: 450px;
-	height: 2000px;
+	height: 1000px;
+	margin-top: 30px;
 	
 }
 
