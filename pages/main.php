@@ -18,11 +18,10 @@ $game->action('discard', 1);
 $game->action('discard', 1);
 $game->action('discard', 1);
 $game->hints = 5;
+$game->lives = 2;
 //END OF TEST CODE
 $game->saveToDb();
 $_SESSION['currentgame'] = $game->id;
-
-krumo($game);
 
 //TODO: separate own hand
 $gamerender['players'] = Template::renderElement('players', $game);
@@ -37,4 +36,8 @@ function hinthelp() {
 	return;
 }
 
-Template::$content = Template::renderTemplate('main', array('game' => $gamerender));
+function chatline() {
+	krumo($game);
+}
+
+Template::$content = Template::renderTemplate('main', array('gamerender' => $gamerender, 'game' => $game));

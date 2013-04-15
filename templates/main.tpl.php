@@ -2,7 +2,7 @@
 	<div id="own">
     <h2 id="ownname" class="element">Player 1</h2>
     <div id="ownhand">
-      <?php echo $game['ownhand']; ?>
+      <?php echo $gamerender['ownhand']; ?>
     </div>
 		<form id="actions" method="post">
         	<div id="actionhints" class="displaynone">
@@ -49,29 +49,31 @@
         	<input class="hidden" type="radio" id="selectcard5" name="selectcard" value="5" />
             <div class="linebrake">&nbsp;</div>
 			<input class="action displaynone" type="button" id="canceling" name="canceling" value="Mégsem" onclick="return cancel();" />
-			<input class="action" type="button" id="hinting" name="hinting" value="Súgás" onclick="return hint(5);" />
-			<input class="action" type="button" id="fireing" name="fireing" value="Lővés" onclick="return fire(4)" />
-			<input class="action" type="button" id="droping" name="droping" value="Dobás" onclick="return drop(4);" />
+			<input class="action" type="button" id="hinting" name="hinting" value="Súgás" onclick="return hint(3);" />
+			<input class="action" type="button" id="fireing" name="fireing" value="Lővés" onclick="return fire(5)" />
+			<input class="action" type="button" id="droping" name="droping" value="Dobás" onclick="return drop(5);" />
 		</form>      
 	</div>
 	<div id="board">
 		<div id="fireworks">
-      <?php echo $game['fireworks']; ?>
+      <?php echo $gamerender['fireworks']; ?>
 		</div>
 		<div id="hints">
-      <?php echo $game['hints']; ?>
+      <?php echo $gamerender['hints']; ?>
 		</div>	
 		<div id="lives">
-      <?php echo $game['lives']; ?>
+      <?php echo $gamerender['lives']; ?>
 		</div>
 	</div>			
-	<div id="discard">
-    <?php echo $game['discard']; ?>
-	</div>
 </div>
 <div class="linebrake">&nbsp;</div>
 <div id="logandchat">
+  <span id="consolelog">&nbsp;</span>
+  <?php krumo($game); ?>
 </div>
 <div id="players">
-  <?php echo $game['players']; ?>
+  <?php echo $gamerender['players']; ?>
+</div>
+<div id="discard">
+  <?php echo $gamerender['discard']; ?>
 </div>

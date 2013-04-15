@@ -9,6 +9,7 @@ function submitAction(action, param1, param2) {
       console.log(output);
       /*debug*/
       console.log('Current player:'+output.debug.players[output.debug.currentplayer].name);
+      document.getElementById('ownname').innerHTML = (output.debug.players[output.debug.currentplayer].name);
       if(output.refresh) {
         for(element in output.refresh) {
           refreshElement(element, output.refresh[element]);
@@ -31,18 +32,14 @@ $(document).ready(function(){
 
 
 function memoclick(input) {
-	gombNev=input.src;
-	gombEleje=gombNev.slice(0, -5);
-	gombMost=gombNev.substr(-5, 1);
-	if (gombMost == '-') {gombUj = '1'};
-	if (gombMost == '1') {gombUj = '0'};
-	if (gombMost == '0') {gombUj = '-'};
-	input.src=gombEleje + gombUj + '.gif';
-	input.value=gombUj;
-	return false;
-}
-
-function hint() {
+	buttonName=input.src;
+	buttonBegin=buttonName.slice(0, -5);
+	buttonOld=buttonName.substr(-5, 1);
+	if (buttonOld == '-') {buttonNew = '1'};
+	if (buttonOld == '1') {buttonNew = '0'};
+	if (buttonOld == '0') {buttonNew = '-'};
+	input.src=buttonBegin + buttonNew + '.gif';
+	input.value=buttonNew;
 	return false;
 }
 
@@ -78,8 +75,7 @@ function cancel() {
 function fire(handsize) {
 	valasztott = elenorzes('selectcard'); 
 	if (valasztott != 0) {
-    submitAction('build', valasztott - 1);
-		alert('submit: ' + valasztott + '. lap fellövése!');
+	    submitAction('build', valasztott - 1);
 		cancel();
 		return false;
 	} else {
@@ -99,8 +95,7 @@ function fire(handsize) {
 function drop(handsize) {
 	valasztott = elenorzes('selectcard'); 
 	if (valasztott != 0) {
-    submitAction('discard', valasztott - 1);
-		alert('submit: ' + valasztott + '. lap eldobása!');
+	    submitAction('discard', valasztott - 1);
 		cancel();
 		return false;
 	} else {
@@ -142,7 +137,7 @@ function towhom(whomid, whomname) {
 }
 
 function beforesubmit(kuldo) {
-  //submitAction('hint', player, hint);
+	//submitAction('hint', player, hint);
 	alert('submit: Az összes ' + kuldo.value + ' megsúgása...');
 	cancel();
 	return false;
