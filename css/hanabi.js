@@ -22,6 +22,14 @@ function refreshElement(element, content) {
   $('#' + element).html(content);
 }
 
+$(document).ready(function(){
+  $('#own').on('click', '#ownhand input', function(event) {
+    event.preventDefault();
+    memoclick(this);
+  });
+});
+
+
 function memoclick(input) {
 	gombNev=input.src;
 	gombEleje=gombNev.slice(0, -5);
