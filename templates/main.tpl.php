@@ -130,10 +130,6 @@
 <div class="linebrake">&nbsp;</div>
 <div id="logandchat">
 </div>
-<div id="otherplayers">
-  <?php
-  foreach($game['players'] as $player) {
-    echo $player;
-  }
-  ?>
+<div id="players">
+  <?php echo $game['players']; ?>
 </div>

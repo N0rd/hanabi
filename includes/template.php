@@ -17,6 +17,12 @@ Class Template {
       case 'hints': return Template::renderTemplate('hints', array('available' => $game->hints, 'used' => $game->maxhints - $game->hints));
       case 'lives': return Template::renderTemplate('lives', array('available' => $game->lives, 'used' => $game->getMaxLives() - $game->lives));
       case 'discard': return Template::renderTemplate('discard', array('discard' => $game->discard));
+      case 'players': 
+        $output = '';
+        foreach($game->players as $player) {
+          $output .= Template::renderTemplate('hand', array('player' => $player));
+        }
+        return $output;
       default: return '';
     }
   }

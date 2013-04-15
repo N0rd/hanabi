@@ -7,7 +7,6 @@ $game->start();
 //TEST CODE, CAN BE MODIFIED, DELETED FREELY
 $game->builtpiles['Y'] = 3;
 $game->builtpiles['R'] = 2;
-$game->lives = 1;
 $game->action('discard', 1);
 $game->action('discard', 1);
 $game->action('discard', 1);
@@ -26,11 +25,7 @@ $_SESSION['currentgame'] = $game->id;
 krumo($game);
 
 //TODO: separate own hand
-$gamerender['players'] = array();
-foreach($game->players as $player) {
-  $gamerender['players'][] = Template::renderTemplate('hand', array('player' => $player));
-}
-
+$gamerender['players'] = Template::renderElement('players', $game);
 $gamerender['fireworks'] = Template::renderElement('fireworks', $game);
 $gamerender['hints'] = Template::renderElement('hints', $game);
 $gamerender['lives'] = Template::renderElement('lives', $game);

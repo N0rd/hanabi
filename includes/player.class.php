@@ -73,7 +73,7 @@ Class Player {
     $this->game->addToDiscard($card);
     $this->draw();
     $this->game->increaseHints();
-    return array('success' => true, 'refresh' => array('ownhand', 'discard', 'hints'));
+    return array('success' => true, 'refresh' => array('ownhand', 'discard', 'hints', /*debug*/'players'));
   }
     
   private function build($cardplace) {
@@ -82,9 +82,9 @@ Class Player {
     $this->draw();
     $success = $this->game->buildPile($card);
     if($success) {
-      return array('success' => $success, 'refresh' => array('ownhand', 'discard', 'lives'));
+      return array('success' => $success, 'refresh' => array('ownhand', 'discard', 'lives', /*debug*/'players'));
     } else {
-      return array('success' => $success, 'refresh' => array('ownhand', 'fireworks', 'lives'));
+      return array('success' => $success, 'refresh' => array('ownhand', 'fireworks', 'lives', /*debug*/'players'));
     }
   }
   
