@@ -113,13 +113,8 @@
 		</form>      
 	</div>
 	<div id="board">
-		<div id="fireworks"><h2 class="element">Tüzijáték</h2>
-			<img class="cardplace R" src="images/cards/R0.jpg" alt="0" />
-			<img class="cardplace W" src="images/cards/W0.jpg" alt="0" />
-			<img class="cardplace G" src="images/cards/G0.jpg" alt="0" />
-			<img class="cardplace Y" src="images/cards/Y0.jpg" alt="0" />
-			<img class="cardplace B" src="images/cards/B0.jpg" alt="0" />
-			<img class="cardplace P" src="images/cards/P0.jpg" alt="0" />
+		<div id="fireworks">
+      <?php echo $game['fireworks']; ?>
 		</div>
 		<div id="hints"><h2 class="element">Súgások</h2>
 			<img class="marker" src="images/hint.gif" alt="+" />
