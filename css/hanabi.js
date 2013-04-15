@@ -9,6 +9,7 @@ function submitAction(action, param1, param2) {
       console.log(output);
       /*debug*/
       console.log('Current player:'+output.debug.players[output.debug.currentplayer].name);
+      setOwnTitle(output.debug.players[output.debug.currentplayer].name);
       if(output.refresh) {
         for(element in output.refresh) {
           refreshElement(element, output.refresh[element]);
@@ -70,14 +71,14 @@ function showActions(actions) {
 }
 
 function memoclick(input) {
-	gombNev=input.src;
-	gombEleje=gombNev.slice(0, -5);
-	gombMost=gombNev.substr(-5, 1);
-	if (gombMost == '-') {gombUj = '1'};
-	if (gombMost == '1') {gombUj = '0'};
-	if (gombMost == '0') {gombUj = '-'};
-	input.src=gombEleje + gombUj + '.gif';
-	input.value=gombUj;
+	var buttonName = input.src;
+	var buttonBegin = buttonName.slice(0, -5);
+	var buttonOld = buttonName.substr(-5, 1);
+	if (buttonOld == '-') {buttonNew = '1'};
+	if (buttonOld == '1') {buttonNew = '0'};
+	if (buttonOld == '0') {buttonNew = '-'};
+	input.src = buttonBegin + buttonNew + '.gif';
+	input.value = buttonNew;
 	return false;
 }
 
@@ -122,8 +123,8 @@ function fire() {
 function discard() {
 	var selected = getSelectedCard();
 	if (selected != -1) {
-    submitAction('discard', valasztott);
-		alert('submit: ' + valasztott + '. lap eldobása!');
+    submitAction('discard', selected);
+		alert('submit: ' + selected + '. lap eldobása!');
 		cancel();
 		return false;
 	} else {

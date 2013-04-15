@@ -24,8 +24,6 @@ if(isset($_GET['id'])) {
   $game->saveToDb();
 }
 $_SESSION['currentgame'] = $game->id;
-krumo($game);
-
 //TODO: separate own hand
 $gamerender['players'] = Template::renderElement('players', $game);
 $gamerender['ownhand'] = Template::renderElement('ownhand', $game);
@@ -36,4 +34,8 @@ $gamerender['discard'] = Template::renderElement('discard', $game);
 //we should rearrange these somehow
 $gamerender['game'] = $game;
 
-Template::$content = Template::renderTemplate('main', array('game' => $gamerender));
+function chatline() {
+	krumo($game);
+}
+
+Template::$content = Template::renderTemplate('main', array('gamerender' => $gamerender, 'game' => $game));

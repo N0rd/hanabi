@@ -114,8 +114,6 @@
 	float: left;
 	margin: 3px 3px 3px;
 	border-radius: 10px;
-
-
 }
 
 .marker {
@@ -131,11 +129,9 @@
 }
 
 #discard {
-	width: 320px;
+	width: 500px;
 	padding: 0 0 0 60px;
-	height: 260px;
 	float: left;
-	overflow: hidden;
 }
 
 .discardrow {
@@ -173,7 +169,6 @@
 	width: 450px;
 	height: 1000px;
 	margin-top: 30px;
-	
 }
 
 .playerhand {
@@ -211,9 +206,4 @@
 
 .P {
 	background-color: #F0F;
-}
-
-
-#card15, .markerbad, .P {
-	visibility: hidden;
 }
