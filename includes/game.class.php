@@ -39,7 +39,7 @@ Class Game {
   
   public function start() {
     $this->deck = new Deck(null, $this->variant);
-    $this->lives = 3;
+    $this->lives = $this->getMaxLives();
     $this->discard = array();
     
     foreach($this->colors as $cid => $c) {
@@ -186,6 +186,10 @@ Class Game {
     } elseif ($this->variant == 'easy') {
       $this->maxhints = 12;
     }
+  }
+
+  public function getMaxLives() {
+    return 3;
   }
   
   public function increaseHints() {

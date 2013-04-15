@@ -119,10 +119,8 @@
 		<div id="hints">
       <?php echo $game['hints']; ?>
 		</div>	
-		<div id="lives"><h2 class="element">Életek</h2>
-			<img class="marker" src="images/lifeis.jpg" alt="&nbsp;" />
-			<img class="marker" src="images/lifeis.jpg" alt="&nbsp;" />
-			<img class="marker" src="images/lifelost.jpg" alt="X" />
+		<div id="lives">
+      <?php echo $game['lives']; ?>
 		</div>
 	</div>			
 	<div id="trash"><h2 class="element">Kuka</h2>

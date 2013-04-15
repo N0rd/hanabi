@@ -7,6 +7,7 @@ $game->start();
 $game->builtpiles['Y'] = 3;
 $game->builtpiles['R'] = 2;
 $game->hints = 5;
+$game->lives = 1;
 
 krumo($game);
 
@@ -18,6 +19,7 @@ foreach($game->players as $player) {
 
 $gamerender['fireworks'] = Template::renderTemplate('fireworks', array('fireworks' => $game->builtpiles));
 $gamerender['hints'] = Template::renderTemplate('hints', array('available' => $game->hints, 'used' => $game->maxhints - $game->hints));
+$gamerender['lives'] = Template::renderTemplate('lives', array('available' => $game->lives, 'used' => $game->getMaxLives() - $game->lives));
 
 
 
