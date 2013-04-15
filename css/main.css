@@ -54,11 +54,11 @@
 
 #hintcolors, #hintnumbers {
 	float: left;
-	width: 200px;
+	width: 100px;
 	text-align: left;
 }
 
-.hintcolor, .hintnumber {
+.hintselector {
 	width: 50px;
 
 }

@@ -35,12 +35,19 @@ $(document).ready(function(){
       event.preventDefault();
       clearCardSelection();
       $(this).addClass('selected');
-    }  
+    }
   });
   $('#cancelButton').click(cancel);
   $('#hintButton').click(hint);
   $('#fireButton').click(fire);
   $('#discardButton').click(discard);
+
+  $('#actionhints').on('click', '.toplayer', function() {
+    selectHintPlayer($(this).attr('data-playerplace'), $(this).val());
+  });
+  $('#actionhintwhat').on('click', '.hintselector', function(){
+    selectHintHint($(this).attr('data-id'));
+  });
 });
 
 function getSelectedCard() {
@@ -77,7 +84,7 @@ function memoclick(input) {
 function cancel() {
   ownCardSelectMode = false;
   clearCardSelection();
-	setOwnTitle('Player 1');	
+	setOwnTitle('Player 1');
 	potty = document.getElementsByName('selectcard');
 	for (i = 0; i < potty.length; i++) {
 		potty[i].className = 'displaynone';
@@ -85,9 +92,9 @@ function cancel() {
 	}
 	document.getElementById('ownhand').className = 'showhints';
 	document.getElementById('actionhints').className = 'displaynone';
-	document.getElementById('actionhintwhat').className = 'displaynone';	
+	document.getElementById('actionhintwhat').className = 'displaynone';
   showActions(['fire', 'hint', 'discard']);
-	document.getElementById('hintButton').value = 'Súgás';	
+	document.getElementById('hintButton').value = 'Súgás';
 	return false;
 }
 
@@ -106,7 +113,7 @@ function fire() {
       setOwnTitle('Válassz egy lapot!');
       showActions(['fire', 'cancel']);
       document.getElementById('own').className = '';
-      document.getElementById('actionhints').className = 'displaynone';    
+      document.getElementById('actionhints').className = 'displaynone';
     }
 		return false;
 	}
@@ -131,39 +138,32 @@ function discard() {
 	}
 }
 
-function hint(playersnum) {
+function hint() {
 	document.getElementById('ownhand').className = 'displaynone';
 	document.getElementById('actionhints').className = 'showhints';
-	document.getElementById('actionhintwhat').className = 'displaynone';		
+	document.getElementById('actionhintwhat').className = 'displaynone';
 	setOwnTitle('Kinek súgsz?');
-	for (i = playersnum + 1; i <= 5; i++ ) {
-		document.getElementById('player' + i).className = 'displaynone';
-	}
   showActions(['cancel']);
 	return false;
 }
 
-function towhom(whomid, whomname) {
+function selectHintPlayer(targetPlayer, name) {
 	document.getElementById('actionhints').className = 'displaynone';
-	document.getElementById('whom').value = whomid;
+	hintTargetPlayer = targetPlayer;
 	document.getElementById('actionhintwhat').className = 'showhints';
-	document.getElementById('ownname').innerHTML = 'Mit súgsz? ' + whomname + ':';
+	document.getElementById('ownname').innerHTML = 'Mit súgsz? ' + name + ':';
 	document.getElementById('hintButton').value = 'Másnak';
   showActions(['hint', 'cancel']);
   return false;
 }
 
-function beforesubmit(kuldo) {
-  //submitAction('hint', player, hint);
-	alert('submit: Az összes ' + kuldo.value + ' megsúgása...');
+function selectHintHint(hint) {
+  submitAction('hint', hintTargetPlayer, hint);
+	alert('submit: Az összes ' + hint + ' megsúgása...');
 	cancel();
 	return false;
 }
 
 function newWindow() {
 	window.open('/phpmyadmin/','_blank');
-}
-
-function begining() {
-
 }

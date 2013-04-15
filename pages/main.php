@@ -33,10 +33,7 @@ $gamerender['fireworks'] = Template::renderElement('fireworks', $game);
 $gamerender['hints'] = Template::renderElement('hints', $game);
 $gamerender['lives'] = Template::renderElement('lives', $game);
 $gamerender['discard'] = Template::renderElement('discard', $game);
-
-function hinthelp() {
-	echo ('1., 3.');
-	return;
-}
+//we should rearrange these somehow
+$gamerender['game'] = $game;
 
 Template::$content = Template::renderTemplate('main', array('game' => $gamerender));
