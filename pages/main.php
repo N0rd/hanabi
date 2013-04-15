@@ -5,26 +5,16 @@ check_login();
 $game = new Game();
 $game->start();
 krumo($game);
-$game->saveToDb();
-$game2 = new Game($game->id);
-krumo($game2);
-$game2->action('hint', '1', 'R');
-krumo($game2);
-$game2->action('hint', '2', '3');
-krumo($game2);
-$game2->saveToDb();
-$game3 = new Game($game2->id);
-$game3->action('discard', 3);
-krumo($game3);
-$game3->action('build',1);
-krumo($game3);
-$game3->saveToDb();
+
+$gamerender['players'] = array();
+foreach($game->players as $player) {
+  $gamerender['players'][] = Template::renderTemplate('hand', array('player' => $player));
+}
+
 
 function hinthelp() {
 	echo ('1., 3.');
 	return;
 }
 
-
-
-Template::$content = Template::renderTemplate('main', array('game' => $game));
+Template::$content = Template::renderTemplate('main', array('game' => $gamerender));

@@ -163,7 +163,7 @@
 	
 }
 
-#secound, #third, #fourth, #fifth {
+.playerhand {
 	float: left;
 	width: 300px;
 	padding-left: 80px;

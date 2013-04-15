@@ -172,31 +172,9 @@
 <div id="logandchat">
 </div>
 <div id="otherplayers">
-	<div id="secound"><h2 class="element">Player2</h2>
-		<img class="cardhand Y" src="images/cards/Y1.jpg" alt="1" />
-		<img class="cardhand R" src="images/cards/R2.jpg" alt="2" />
-		<img class="cardhand B" src="images/cards/B3.jpg" alt="5" />
-		<img class="cardhand W" src="images/cards/W4.jpg" alt="4" />
-		<img class="cardhand Y" src="images/cards/Y4.jpg" alt="4" />
-	</div>
-	<div id="fourth"><h2 class="element">Player4</h2>
-		<img class="cardhand R" src="images/cards/R2.jpg" alt="2" />
-		<img class="cardhand Y" src="images/cards/Y3.jpg" alt="3" />
-		<img class="cardhand G" src="images/cards/G4.jpg" alt="4" />
-		<img class="cardhand B" src="images/cards/B3.jpg" alt="3" />
-        
-	</div>
-	<div id="third"><h2 class="element">Player3</h2>
-		<img class="cardhand B" src="images/cards/B3.jpg" alt="3" />
-		<img class="cardhand R" src="images/cards/R2.jpg" alt="2" />
-		<img class="cardhand Y" src="images/cards/Y3.jpg" alt="3" />
-		<img class="cardhand W" src="images/cards/W1.jpg" alt="1" />
-		<img class="cardhand G" src="images/cards/G2.jpg" alt="2" />       
-	</div>
-	<div id="fifth"><h2 class="element">Player5</h2>
-		<img class="cardhand B" src="images/cards/B1.jpg" alt="1" />
-		<img class="cardhand Y" src="images/cards/Y2.jpg" alt="2" />
-		<img class="cardhand G" src="images/cards/G3.jpg" alt="3" />
-		<img class="cardhand W" src="images/cards/W5.jpg" alt="5" />
-	</div>
+  <?php
+  foreach($game['players'] as $player) {
+    echo $player;
+  }
+  ?>
 </div>
