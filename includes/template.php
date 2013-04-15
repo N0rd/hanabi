@@ -17,6 +17,7 @@ Class Template {
       case 'hints': return Template::renderTemplate('hints', array('available' => $game->hints, 'used' => $game->maxhints - $game->hints));
       case 'lives': return Template::renderTemplate('lives', array('available' => $game->lives, 'used' => $game->getMaxLives() - $game->lives));
       case 'discard': return Template::renderTemplate('discard', array('discard' => $game->discard));
+      case 'ownhand': return Template::renderTemplate('ownhand', array('cards' => /*debug*/ $game->players[$game->currentplayer]->hand));
       case 'players': 
         $output = '';
         foreach($game->players as $player) {

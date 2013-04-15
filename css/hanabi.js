@@ -22,6 +22,14 @@ function refreshElement(element, content) {
   $('#' + element).html(content);
 }
 
+$(document).ready(function(){
+  $('#own').on('click', '#ownhand input', function(event) {
+    event.preventDefault();
+    memoclick(this);
+  });
+});
+
+
 function memoclick(input) {
 	gombNev=input.src;
 	gombEleje=gombNev.slice(0, -5);
@@ -56,7 +64,7 @@ function cancel() {
 		potty[i].className = 'displaynone';
 		potty[i].checked = false;
 	}
-	document.getElementById('divowncards').className = 'showhints';
+	document.getElementById('ownhand').className = 'showhints';
 	document.getElementById('actionhints').className = 'displaynone';
 	document.getElementById('actionhintwhat').className = 'displaynone';	
 	document.getElementById('canceling').className = 'displaynone';
@@ -108,7 +116,7 @@ function drop(handsize) {
 }
 
 function hint(playersnum) {
-	document.getElementById('divowncards').className = 'displaynone';
+	document.getElementById('ownhand').className = 'displaynone';
 	document.getElementById('actionhints').className = 'showhints';
 	document.getElementById('actionhintwhat').className = 'displaynone';		
 	document.getElementById('ownname').innerHTML = 'Kinek súgsz?';

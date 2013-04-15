@@ -1,67 +1,9 @@
 <div id="firstline">
-	<div id="own"><h2 id="ownname" class="element">Player 1</h2>
-        <div id="divowncards">
-            <form id="card11" class="owncard">
-                <input class="memo" type="image" src="images/buttons/r-.gif" name="R" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/1-.gif" name="1" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/w-.gif" name="W" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/2-.gif" name="2" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/g-.gif" name="G" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/3-.gif" name="3" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/y-.gif" name="Y" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/4-.gif" name="4" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/b-.gif" name="B" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/5-.gif" name="5" value="-" onclick="return memoclick(this);" />
-            </form>
-            <form id="card12" class="owncard">
-                <input class="memo" type="image" src="images/buttons/r-.gif" name="R" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/1-.gif" name="1" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/w-.gif" name="W" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/2-.gif" name="2" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/g-.gif" name="G" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/3-.gif" name="3" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/y-.gif" name="Y" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/4-.gif" name="4" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/b-.gif" name="B" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/5-.gif" name="5" value="-" onclick="return memoclick(this);" />
-            </form>
-            <form id="card13" class="owncard">
-                <input class="memo" type="image" src="images/buttons/r-.gif" name="R" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/1-.gif" name="1" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/w-.gif" name="W" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/2-.gif" name="2" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/g-.gif" name="G" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/3-.gif" name="3" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/y-.gif" name="Y" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/4-.gif" name="4" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/b-.gif" name="B" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/5-.gif" name="5" value="-" onclick="return memoclick(this);" />
-            </form>
-            <form id="card14" class="owncard">
-                <input class="memo" type="image" src="images/buttons/r-.gif" name="R" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/1-.gif" name="1" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/w-.gif" name="W" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/2-.gif" name="2" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/g-.gif" name="G" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/3-.gif" name="3" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/y-.gif" name="Y" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/4-.gif" name="4" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/b-.gif" name="B" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/5-.gif" name="5" value="-" onclick="return memoclick(this);" />
-            </form>
-            <form id="card15" class="owncard">
-                <input class="memo" type="image" src="images/buttons/r-.gif" name="R" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/1-.gif" name="1" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/w-.gif" name="W" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/2-.gif" name="2" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/g-.gif" name="G" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/3-.gif" name="3" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/y-.gif" name="Y" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/4-.gif" name="4" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/b-.gif" name="B" value="-" onclick="return memoclick(this);" />
-                <input class="memo" type="image" src="images/buttons/5-.gif" name="5" value="-" onclick="return memoclick(this);" />
-            </form>
-        </div>
+	<div id="own">
+    <h2 id="ownname" class="element">Player 1</h2>
+    <div id="ownhand">
+      <?php echo $game['ownhand']; ?>
+    </div>
 		<form id="actions" method="post">
         	<div id="actionhints" class="displaynone">
                 <input class="toplayer" type="button" id="player2" name="player2" value="Player 2" onclick="return towhom(2, 'Player 2');" />
