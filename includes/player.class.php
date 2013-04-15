@@ -82,9 +82,9 @@ Class Player {
     $this->draw();
     $success = $this->game->buildPile($card);
     if($success) {
-      return array('success' => $success, 'refresh' => array('ownhand', 'discard', 'lives', /*debug*/'players'));
-    } else {
       return array('success' => $success, 'refresh' => array('ownhand', 'fireworks', 'lives', /*debug*/'players'));
+    } else {
+      return array('success' => $success, 'refresh' => array('ownhand', 'discard', 'lives', /*debug*/'players'));
     }
   }
   
