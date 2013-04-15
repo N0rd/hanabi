@@ -8,7 +8,8 @@ function submitAction(action, param1, param2) {
     success: function(output) {
       console.log(output);
       /*debug*/
-      console.log('Current player:'+output.debug.players[output.debug.currentplayer].name);
+      currentPlayerName = output.debug.players[output.debug.currentplayer].name;
+      console.log('Current player:' + currentPlayerName);
       setOwnTitle(output.debug.players[output.debug.currentplayer].name);
       if(output.refresh) {
         for(element in output.refresh) {
@@ -49,6 +50,7 @@ $(document).ready(function(){
   $('#actionhintwhat').on('click', '.hintselector', function(){
     selectHintHint($(this).attr('data-id'));
   });
+  currentPlayerName = $('#ownname').html();
 });
 
 function getSelectedCard() {
@@ -84,8 +86,8 @@ function memoclick(input) {
 
 function cancel() {
   ownCardSelectMode = false;
+  setOwnTitle(currentPlayerName);
   clearCardSelection();
-	setOwnTitle('Player 1');
 	potty = document.getElementsByName('selectcard');
 	for (i = 0; i < potty.length; i++) {
 		potty[i].className = 'displaynone';
