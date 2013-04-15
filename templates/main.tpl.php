@@ -123,7 +123,7 @@
       <?php echo $game['lives']; ?>
 		</div>
 	</div>			
-	<div id="trash">
+	<div id="discard">
     <?php echo $game['discard']; ?>
 	</div>
 </div>

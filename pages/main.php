@@ -23,9 +23,6 @@ $game->hints = 5;
 $game->saveToDb();
 $_SESSION['currentgame'] = $game->id;
 
-
-
-
 krumo($game);
 
 //TODO: separate own hand
@@ -34,12 +31,10 @@ foreach($game->players as $player) {
   $gamerender['players'][] = Template::renderTemplate('hand', array('player' => $player));
 }
 
-$gamerender['fireworks'] = Template::renderTemplate('fireworks', array('fireworks' => $game->builtpiles));
-$gamerender['hints'] = Template::renderTemplate('hints', array('available' => $game->hints, 'used' => $game->maxhints - $game->hints));
-$gamerender['lives'] = Template::renderTemplate('lives', array('available' => $game->lives, 'used' => $game->getMaxLives() - $game->lives));
-$gamerender['discard'] = Template::renderTemplate('discard', array('discard' => $game->discard));
-
-
+$gamerender['fireworks'] = Template::renderElement('fireworks', $game);
+$gamerender['hints'] = Template::renderElement('hints', $game);
+$gamerender['lives'] = Template::renderElement('lives', $game);
+$gamerender['discard'] = Template::renderElement('discard', $game);
 
 function hinthelp() {
 	echo ('1., 3.');

@@ -73,24 +73,29 @@ Class Player {
     $this->game->addToDiscard($card);
     $this->draw();
     $this->game->increaseHints();
-    return true;  
+    return array('success' => true, 'refresh' => array('ownhand', 'discard', 'hints'));
   }
     
   private function build($cardplace) {
     $card = $this->hand[$cardplace];
     unset($this->hand[$cardplace]);
     $this->draw();
-    return $this->game->buildPile($card);
+    $success = $this->game->buildPile($card);
+    if($success) {
+      return array('success' => $success, 'refresh' => array('ownhand', 'discard', 'lives'));
+    } else {
+      return array('success' => $success, 'refresh' => array('ownhand', 'fireworks', 'lives'));
+    }
   }
   
   private function hint($playerplace, $hint) {
     if($playerplace != $this->playerplace) {
       if($this->game->decreaseHints()) {
         $this->game->players[$playerplace]->receiveHint($hint);
-        return true;
+        return array('success' => true, 'refresh' => array('hints'));
       }
     }
-    return false;
+    return array('success' => false);
   }
   
   public function receiveHint($hint) {

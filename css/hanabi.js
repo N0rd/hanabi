@@ -7,8 +7,17 @@ function submitAction(action, param1, param2) {
     dataType: 'json',
     success: function(output) {
       console.log(output);
+      if(output.refresh) {
+        for(element in output.refresh) {
+          refreshElement(element, output.refresh[element]);
+        }
+      }
     }
   });
+}
+
+function refreshElement(element, content) {
+  $('#' + element).html(content);
 }
 
 function memoclick(input) {
