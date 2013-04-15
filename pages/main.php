@@ -4,6 +4,7 @@ check_login();
 //poor(/lazy) man's unit tests :)
 $game = new Game();
 $game->start();
+//TEST CODE, CAN BE MODIFIED, DELETED FREELY
 $game->builtpiles['Y'] = 3;
 $game->builtpiles['R'] = 2;
 $game->lives = 1;
@@ -18,6 +19,12 @@ $game->action('discard', 1);
 $game->action('discard', 1);
 $game->action('discard', 1);
 $game->hints = 5;
+//END OF TEST CODE
+$game->saveToDb();
+$_SESSION['currentgame'] = $game->id;
+
+
+
 
 krumo($game);
 

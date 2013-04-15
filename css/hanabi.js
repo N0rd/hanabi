@@ -1,4 +1,16 @@
 // JavaScript Document
+function submitAction(action, param1, param2) {
+  $.ajax({
+    url: 'action.php',
+    data: {action: action, param1: param1, param2: param2},
+    type: 'post',
+    dataType: 'json',
+    success: function(output) {
+      console.log(output);
+    }
+  });
+}
+
 function memoclick(input) {
 	gombNev=input.src;
 	gombEleje=gombNev.slice(0, -5);
@@ -47,6 +59,7 @@ function cancel() {
 function fire(handsize) {
 	valasztott = elenorzes('selectcard'); 
 	if (valasztott != 0) {
+    submitAction('build', valasztott - 1);
 		alert('submit: ' + valasztott + '. lap fellövése!');
 		cancel();
 		return false;
@@ -67,6 +80,7 @@ function fire(handsize) {
 function drop(handsize) {
 	valasztott = elenorzes('selectcard'); 
 	if (valasztott != 0) {
+    submitAction('discard', valasztott - 1);
 		alert('submit: ' + valasztott + '. lap eldobása!');
 		cancel();
 		return false;
@@ -109,6 +123,7 @@ function towhom(whomid, whomname) {
 }
 
 function beforesubmit(kuldo) {
+  //submitAction('hint', player, hint);
 	alert('submit: Az összes ' + kuldo.value + ' megsúgása...');
 	cancel();
 	return false;

@@ -139,8 +139,9 @@ Class Game {
       //disabled for initial testing
       //return false;
     }
-    $this->players[$this->currentplayer]->action($action, $param1, $param2);
+    $output = $this->players[$this->currentplayer]->action($action, $param1, $param2);
     $this->nextPlayer();
+    return $output;
   }
   
   public function addToDiscard($card) {

@@ -5,6 +5,7 @@
 <title>Digitális Hanabi</title>
 <link href="css/hanabi.css" rel="stylesheet" type="text/css" />
 <link href="css/main.css" rel="stylesheet" type="text/css" />
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="css/hanabi.js"></script>
 </head>
 <body>
