@@ -26,6 +26,7 @@ krumo($game);
 
 //TODO: separate own hand
 $gamerender['players'] = Template::renderElement('players', $game);
+$gamerender['ownhand'] = Template::renderElement('ownhand', $game);
 $gamerender['fireworks'] = Template::renderElement('fireworks', $game);
 $gamerender['hints'] = Template::renderElement('hints', $game);
 $gamerender['lives'] = Template::renderElement('lives', $game);
