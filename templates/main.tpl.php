@@ -116,16 +116,8 @@
 		<div id="fireworks">
       <?php echo $game['fireworks']; ?>
 		</div>
-		<div id="hints"><h2 class="element">Súgások</h2>
-			<img class="marker" src="images/hint.gif" alt="+" />
-			<img class="marker" src="images/hint.gif" alt="+" />
-			<img class="marker" src="images/hint.gif" alt="+" />
-			<img class="marker" src="images/hint.gif" alt="+" />
-			<img class="marker" src="images/hint.gif" alt="+" />
-			<img class="marker" src="images/hint.gif" alt="+" />
-			<img class="marker" src="images/hintused.gif" alt="-" />
-			<img class="marker" src="images/hintused.gif" alt="-" />
-			<img class="marker" src="images/hintused.gif" alt="-" />
+		<div id="hints">
+      <?php echo $game['hints']; ?>
 		</div>	
 		<div id="lives"><h2 class="element">Életek</h2>
 			<img class="marker" src="images/lifeis.jpg" alt="&nbsp;" />

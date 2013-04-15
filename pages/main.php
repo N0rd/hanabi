@@ -6,6 +6,8 @@ $game = new Game();
 $game->start();
 $game->builtpiles['Y'] = 3;
 $game->builtpiles['R'] = 2;
+$game->hints = 5;
+
 krumo($game);
 
 //TODO: separate own hand
@@ -15,6 +17,9 @@ foreach($game->players as $player) {
 }
 
 $gamerender['fireworks'] = Template::renderTemplate('fireworks', array('fireworks' => $game->builtpiles));
+$gamerender['hints'] = Template::renderTemplate('hints', array('available' => $game->hints, 'used' => $game->maxhints - $game->hints));
+
+
 
 function hinthelp() {
 	echo ('1., 3.');
