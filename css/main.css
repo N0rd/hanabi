@@ -23,6 +23,10 @@
 	border-radius: 10px;
 }
 
+.owncard.selected {
+  border-color: #00FF00;
+}
+
 .memo {
 	width: 25px;
 	height: 25px;

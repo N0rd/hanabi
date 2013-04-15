@@ -23,12 +23,44 @@ function refreshElement(element, content) {
 }
 
 $(document).ready(function(){
-  $('#own').on('click', '#ownhand input', function(event) {
-    event.preventDefault();
-    memoclick(this);
+  ownCardSelectMode = false;
+  $('#ownhand').on('click', 'input', function(event) {
+    if(!ownCardSelectMode) {
+      event.preventDefault();
+      memoclick(this);
+    }
   });
+  $('#ownhand').on('click', '.owncard', function(event) {
+    if(ownCardSelectMode) {
+      event.preventDefault();
+      clearCardSelection();
+      $(this).addClass('selected');
+    }  
+  });
+  $('#cancelButton').click(cancel);
+  $('#hintButton').click(hint);
+  $('#fireButton').click(fire);
+  $('#discardButton').click(discard);
 });
 
+function getSelectedCard() {
+  return $('#ownhand .selected').index();
+}
+
+function clearCardSelection() {
+  $('#ownhand .owncard').removeClass('selected');
+}
+
+function setOwnTitle(title) {
+  $('#ownname').html(title);
+}
+
+function showActions(actions) {
+  $('.action').hide();
+  for(a in actions) {
+    $('#' + actions[a] + 'Button').show();
+  }
+}
 
 function memoclick(input) {
 	gombNev=input.src;
@@ -42,23 +74,10 @@ function memoclick(input) {
 	return false;
 }
 
-function hint() {
-	return false;
-}
-
-function elenorzes(kapott) {
-	valami = document.getElementsByName(kapott);
-	sorszam = 0;
-	for (i = 0; i < valami.length; i++) {
-		if (valami[i].checked) {
-			sorszam = i + 1;
-		}
-	}	
-	return sorszam;
-}
-
 function cancel() {
-	document.getElementById('ownname').innerHTML = 'Player 1';	
+  ownCardSelectMode = false;
+  clearCardSelection();
+	setOwnTitle('Player 1');	
 	potty = document.getElementsByName('selectcard');
 	for (i = 0; i < potty.length; i++) {
 		potty[i].className = 'displaynone';
@@ -67,50 +86,47 @@ function cancel() {
 	document.getElementById('ownhand').className = 'showhints';
 	document.getElementById('actionhints').className = 'displaynone';
 	document.getElementById('actionhintwhat').className = 'displaynone';	
-	document.getElementById('canceling').className = 'displaynone';
-	document.getElementById('droping').className = 'action';
-	document.getElementById('fireing').className = 'action';
-	document.getElementById('hinting').className = 'action';
-	document.getElementById('hinting').value = 'Súgás';	
+  showActions(['fire', 'hint', 'discard']);
+	document.getElementById('hintButton').value = 'Súgás';	
 	return false;
 }
 
-function fire(handsize) {
-	valasztott = elenorzes('selectcard'); 
-	if (valasztott != 0) {
-    submitAction('build', valasztott - 1);
-		alert('submit: ' + valasztott + '. lap fellövése!');
+function fire() {
+	var selected = getSelectedCard();
+	if (selected != -1) {
+    submitAction('build', selected);
+		alert('submit: ' + selected + '. lap fellövése!');
 		cancel();
 		return false;
 	} else {
-		if (document.getElementById('canceling').className == 'action') {alert('Nem választottál lapot!');	}
-		for (i = 1; i <= handsize; i++) {
-			document.getElementById('selectcard' + i).className = 'select';
-		}	
-		document.getElementById('canceling').className = 'action';
-		document.getElementById('hinting').className = 'hidden';
-		document.getElementById('droping').className = 'displaynone';
-		document.getElementById('own').className = '';
-		document.getElementById('actionhints').className = 'displaynone';
+		if (ownCardSelectMode) {
+      alert('Nem választottál lapot!');
+    } else {
+      ownCardSelectMode = true;
+      setOwnTitle('Válassz egy lapot!');
+      showActions(['fire', 'cancel']);
+      document.getElementById('own').className = '';
+      document.getElementById('actionhints').className = 'displaynone';    
+    }
 		return false;
 	}
 }
 
-function drop(handsize) {
-	valasztott = elenorzes('selectcard'); 
-	if (valasztott != 0) {
-    submitAction('discard', valasztott - 1);
+function discard() {
+	var selected = getSelectedCard();
+	if (selected != -1) {
+    submitAction('discard', valasztott);
 		alert('submit: ' + valasztott + '. lap eldobása!');
 		cancel();
 		return false;
 	} else {
-		if (document.getElementById('canceling').className == 'action') {alert('Nem választottál lapot!');	}
-		for (i = 1; i <= handsize; i++) {
-			document.getElementById('selectcard' + i).className = 'select';
-		}	
-		document.getElementById('canceling').className = 'action';
-		document.getElementById('hinting').className = 'displaynone';
-		document.getElementById('fireing').className = 'hidden';
+		if (ownCardSelectMode) {
+      alert('Nem választottál lapot!');
+    } else {
+      ownCardSelectMode = true;
+      setOwnTitle('Válassz egy lapot!');
+      showActions(['discard', 'cancel']);
+    }
 		return false;
 	}
 }
@@ -119,14 +135,11 @@ function hint(playersnum) {
 	document.getElementById('ownhand').className = 'displaynone';
 	document.getElementById('actionhints').className = 'showhints';
 	document.getElementById('actionhintwhat').className = 'displaynone';		
-	document.getElementById('ownname').innerHTML = 'Kinek súgsz?';
+	setOwnTitle('Kinek súgsz?');
 	for (i = playersnum + 1; i <= 5; i++ ) {
 		document.getElementById('player' + i).className = 'displaynone';
 	}
-	document.getElementById('canceling').className = 'action';
-	document.getElementById('hinting').className = 'displaynone';
-	document.getElementById('fireing').className = 'displaynone';
-	document.getElementById('droping').className = 'displaynone';
+  showActions(['cancel']);
 	return false;
 }
 
@@ -135,10 +148,9 @@ function towhom(whomid, whomname) {
 	document.getElementById('whom').value = whomid;
 	document.getElementById('actionhintwhat').className = 'showhints';
 	document.getElementById('ownname').innerHTML = 'Mit súgsz? ' + whomname + ':';
-	document.getElementById('hinting').className = 'action';
-	document.getElementById('hinting').value = 'Másnak';
-	document.getElementById('canceling').className = 'action';
-	return false;
+	document.getElementById('hintButton').value = 'Másnak';
+  showActions(['hint', 'cancel']);
+  return false;
 }
 
 function beforesubmit(kuldo) {

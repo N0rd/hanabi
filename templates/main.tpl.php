@@ -42,16 +42,11 @@
                 </div>             
 	            <div class="linebrake">&nbsp;</div>
             </div>
-        	<input class="hidden" type="radio" id="selectcard1" name="selectcard" value="1" />
-        	<input class="hidden" type="radio" id="selectcard2" name="selectcard" value="2" />
-        	<input class="hidden" type="radio" id="selectcard3" name="selectcard" value="3" />
-        	<input class="hidden" type="radio" id="selectcard4" name="selectcard" value="4" />
-        	<input class="hidden" type="radio" id="selectcard5" name="selectcard" value="5" />
-            <div class="linebrake">&nbsp;</div>
-			<input class="action displaynone" type="button" id="canceling" name="canceling" value="Mégsem" onclick="return cancel();" />
-			<input class="action" type="button" id="hinting" name="hinting" value="Súgás" onclick="return hint(5);" />
-			<input class="action" type="button" id="fireing" name="fireing" value="Lővés" onclick="return fire(4)" />
-			<input class="action" type="button" id="droping" name="droping" value="Dobás" onclick="return drop(4);" />
+      <div class="linebrake">&nbsp;</div>
+			<input class="action" type="button" id="cancelButton" value="Mégsem" />
+			<input class="action" type="button" id="hintButton" value="Súgás" />
+			<input class="action" type="button" id="fireButton" value="Lövés" />
+			<input class="action" type="button" id="discardButton" value="Dobás" />
 		</form>      
 	</div>
 	<div id="board">
