@@ -123,34 +123,8 @@
       <?php echo $game['lives']; ?>
 		</div>
 	</div>			
-	<div id="trash"><h2 class="element">Kuka</h2>
-		<div id="discardred">
-			<img class="cardtrash R" src="images/cards/R1.jpg" alt="1" />
-			<img class="cardtrash R" src="images/cards/R1.jpg" alt="1" />
-			<img class="cardtrash R" src="images/cards/R2.jpg" alt="2" />
-			<img class="cardtrash R" src="images/cards/R4.jpg" alt="4" />
-		</div>
-		<div id="discardwhite">
-			<img class="cardtrash W" src="images/cards/W3.jpg" alt="3" />
-		</div>
-		<div id="discardgreen">
-			<img class="cardtrash G" src="images/cards/G1.jpg" alt="2" />
-			<img class="cardtrash G" src="images/cards/G2.jpg" alt="3" />
-			<img class="cardtrash G" src="images/cards/G4.jpg" alt="4" />
-		</div>
-		<div id="discardyellow">
-			<img class="cardtrash Y" src="images/cards/Y1.jpg" alt="1" />
-			<img class="cardtrash Y" src="images/cards/Y2.jpg" alt="2" />
-			<img class="cardtrash Y" src="images/cards/Y4.jpg" alt="4" />
-		</div>
-		<div id="discardblue">
-			<img class="cardtrash B" src="images/cards/B3.jpg" alt="3" />
-			<img class="cardtrash B" src="images/cards/B1.jpg" alt="1" />
-		</div>
-		<div id="discardpurple">
-			<img class="cardtrash P" src="images/cards/P3.jpg" alt="2" />
-			<img class="cardtrash P" src="images/cards/P4.jpg" alt="3" />
-		</div>
+	<div id="trash">
+    <?php echo $game['discard']; ?>
 	</div>
 </div>
 <div class="linebrake">&nbsp;</div>

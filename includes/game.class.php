@@ -144,7 +144,9 @@ Class Game {
   }
   
   public function addToDiscard($card) {
-    $this->discard[] = $card;
+    $color = Deck::getCardColor($card);
+    $this->discard[$color][] = $card;
+    sort($this->discard[$color]);
   }
   
   public function buildPile($card) {

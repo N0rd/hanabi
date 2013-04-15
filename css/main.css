@@ -134,12 +134,21 @@
 	overflow: hidden;
 }
 
-#discardwhite, #discardgreen, #discardyellow, #discardblue, #discardpurple {
+.discardrow {
 	clear: both;
 }
 
-#discardwhite > img, #discardgreen > img, #discardyellow > img, #discardblue > img, #discardpurple > img {
+.discardrow > img {
 	margin-top: -100px;
+}
+
+
+.discardrows {
+	clear: both;
+}
+
+.discardrow:first-child > img {
+	margin-top: 0px !important;
 }
 
 .cardtrash {
