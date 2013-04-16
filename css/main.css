@@ -19,12 +19,16 @@
 	line-height: 10px;
 	padding: 0px;
 	float: left;
-	margin: 3px;
+	margin: 3px 3px 20px 3px;
 	border-radius: 10px;
 }
 
-.owncard.selected {
+.owncard.selectable {
   border-color: #00FF00;
+}
+
+.owncard.selected {
+	margin: 20px 3px 3px 3px;
 }
 
 .memo {
@@ -38,11 +42,15 @@
 	float: left;
 }
 
-.showhints {
+.displayshow {
 	display: block;
 	float: left;
 	height: 160px;
 	width: 450px;	
+}
+
+.displaynone {
+	display: none;		
 }
 
 .toplayer {
@@ -54,21 +62,12 @@
 
 #hintcolors, #hintnumbers {
 	float: left;
-	width: 100px;
+	width: 225px;
 	text-align: left;
 }
 
 .hintselector {
 	width: 50px;
-
-}
-
-.hidden {
-	visibility: hidden;
-}
-
-.displaynone {
-	display: none;		
 }
 
 .select {

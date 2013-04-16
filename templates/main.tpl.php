@@ -26,7 +26,7 @@
       <div class="linebrake">&nbsp;</div>
     </div>
     <div class="linebrake">&nbsp;</div>
-    <input class="action" type="button" id="cancelButton" value="Mégsem" />
+    <input class="action" type="button" id="cancelButton" value="Mégsem" style="display: none;" />
     <input class="action" type="button" id="hintButton" value="Súgás" />
     <input class="action" type="button" id="fireButton" value="Lövés" />
     <input class="action" type="button" id="discardButton" value="Dobás" />
@@ -46,8 +46,6 @@
 </div>
 <div class="linebrake">&nbsp;</div>
 <div id="logandchat">
-  <span id="consolelog">&nbsp;</span>
-  <?php krumo($game); ?>
 </div>
 <div id="players">
   <?php echo $gamerender['players']; ?>

@@ -34,8 +34,4 @@ $gamerender['discard'] = Template::renderElement('discard', $game);
 //we should rearrange these somehow
 $gamerender['game'] = $game;
 
-function chatline() {
-	krumo($game);
-}
-
 Template::$content = Template::renderTemplate('main', array('gamerender' => $gamerender, 'game' => $game));

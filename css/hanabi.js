@@ -33,7 +33,7 @@ $(document).ready(function(){
   $('#ownhand').on('click', 'input', function(event) {
     if(!ownCardSelectMode) {
       event.preventDefault();
-      memoclick(this);
+      memoClick(this);
     }
   });
   $('#ownhand').on('click', '.owncard', function(event) {
@@ -76,16 +76,18 @@ function showActions(actions) {
   }
 }
 
-
 function addToLog(log) {
   var newLogDiv = $('<div class="logmessage"></div>').html(log);
-  $('#logandchat').append(newLogDiv);
+	$('#logandchat').append(newLogDiv);  
+	
 }
 
-function memoclick(input) {
+
+function memoClick(input) {
 	var buttonName = input.src;
 	var buttonBegin = buttonName.slice(0, -5);
 	var buttonOld = buttonName.substr(-5, 1);
+	var buttonNew;
 	if (buttonOld == '-') {buttonNew = '1'};
 	if (buttonOld == '1') {buttonNew = '0'};
 	if (buttonOld == '0') {buttonNew = '-'};
@@ -95,23 +97,20 @@ function memoclick(input) {
 }
 
 function cancel() {
+	$('#ownhand .owncard').removeClass('selectable');	
   ownCardSelectMode = false;
   setOwnTitle(currentPlayerName);
   clearCardSelection();
-	potty = document.getElementsByName('selectcard');
-	for (i = 0; i < potty.length; i++) {
-		potty[i].className = 'displaynone';
-		potty[i].checked = false;
-	}
-	document.getElementById('ownhand').className = 'showhints';
+	document.getElementById('ownhand').className = '';
 	document.getElementById('actionhints').className = 'displaynone';
-	document.getElementById('actionhintwhat').className = 'displaynone';
+	document.getElementById('actionhintwhat').className = ' displaynone';
   showActions(['fire', 'hint', 'discard']);
 	document.getElementById('hintButton').value = 'Súgás';
 	return false;
 }
 
 function fire() {
+	$('#ownhand .owncard').addClass('selectable');
 	var selected = getSelectedCard();
 	if (selected != -1) {
     submitAction('build', selected);
@@ -124,14 +123,14 @@ function fire() {
       ownCardSelectMode = true;
       setOwnTitle('Válassz egy lapot!');
       showActions(['fire', 'cancel']);
-      document.getElementById('own').className = '';
-      document.getElementById('actionhints').className = 'displaynone';
+      $('actionhints').hide;
     }
 		return false;
 	}
 }
 
 function discard() {
+	$('#ownhand .owncard').addClass('selectable');
 	var selected = getSelectedCard();
 	if (selected != -1) {
     submitAction('discard', selected);
@@ -151,19 +150,20 @@ function discard() {
 
 function hint() {
 	document.getElementById('ownhand').className = 'displaynone';
-	document.getElementById('actionhints').className = 'showhints';
-	document.getElementById('actionhintwhat').className = 'displaynone';
+	document.getElementById('actionhints').className = 'displayshow';
+	document.getElementById('actionhintwhat').className = ' displaynone';
 	setOwnTitle('Kinek súgsz?');
   showActions(['cancel']);
 	return false;
 }
 
 function selectHintPlayer(targetPlayer, name) {
-	document.getElementById('actionhints').className = 'displaynone';
 	hintTargetPlayer = targetPlayer;
-	document.getElementById('actionhintwhat').className = 'showhints';
-	document.getElementById('ownname').innerHTML = 'Mit súgsz? ' + name + ':';
-	document.getElementById('hintButton').value = 'Másnak';
+	document.getElementById('ownhand').className = 'displaynone';
+	document.getElementById('actionhints').className = 'displaynone';
+	document.getElementById('actionhintwhat').className = ' displayshow';
+	setOwnTitle('Mit súgsz? ' + name + ':');
+	document.getElementById('hintButton').value = 'Nem neki';
   showActions(['hint', 'cancel']);
   return false;
 }
