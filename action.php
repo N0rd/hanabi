@@ -13,17 +13,28 @@ if(!isset($_POST['action'])) {
   $output = $game->action($_POST['action'], $_POST['param1'], $_POST['param2']);
   $game->saveToDb();
 }
-$refreshlist = $output['refresh'];
-unset($output['refresh']);
 
 $refresh = array();
-foreach($refreshlist as $element) {
-  if(!isset($refresh[$element])) {
-    $refresh[$element] = Template::renderElement($element, $game);
+if(isset($output['refresh'])) {
+  $refreshlist = $output['refresh'];
+  unset($output['refresh']);
+  foreach($refreshlist as $element) {
+    if(!isset($refresh[$element])) {
+      $refresh[$element] = Template::renderElement($element, $game);
+    }
   }
 }
 
-$output = array('output' => $output, 'refresh' => $refresh, 'debug' => $game);
+
+$logs = array();
+if($game->newlog) {
+  foreach($game->newlog as $log) {
+    $logs[] = Template::renderLog($log, $game);
+  }
+
+}
+
+$output = array('output' => $output, 'refresh' => $refresh, 'debug' => $game, 'logs' => $logs);
 
 
 

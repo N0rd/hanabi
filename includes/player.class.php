@@ -33,11 +33,14 @@ Class Player {
     $query->execute();
   }
   
-  public function draw() {
+  public function draw($initial = false) {
     if(count($this->hand) < $this->game->handsize) {
-      $this->hand[] = $this->game->deck->draw();
+      $card = $this->game->deck->draw();
+      $this->hand[] = $card;
       $this->reorder();
-      
+      if(!$initial) {
+        $this->game->log(array('event' => 'draw', 'player' => $this->id, 'card' => $card));
+      }
       return true;
     }
     return false;
@@ -71,6 +74,7 @@ Class Player {
     $card = $this->hand[$cardplace];
     unset($this->hand[$cardplace]);
     $this->game->addToDiscard($card);
+    $this->game->log(array('event' => 'discard', 'player' => $this->id, 'card' => $card));
     $this->draw();
     $this->game->increaseHints();
     return array('success' => true, 'refresh' => array('ownhand', 'discard', 'hints', /*debug*/'players'));
@@ -79,27 +83,42 @@ Class Player {
   private function build($cardplace) {
     $card = $this->hand[$cardplace];
     unset($this->hand[$cardplace]);
-    $this->draw();
     $success = $this->game->buildPile($card);
     if($success) {
-      return array('success' => $success, 'refresh' => array('ownhand', 'fireworks', 'lives', /*debug*/'players'));
+      $this->game->log(array('event' => 'firesuccess', 'player' => $this->id, 'card' => $card));
+      $output = array('success' => $success, 'refresh' => array('ownhand', 'fireworks', 'lives', /*debug*/'players'));
     } else {
-      return array('success' => $success, 'refresh' => array('ownhand', 'discard', 'lives', /*debug*/'players'));
+      $this->game->log(array('event' => 'firefail', 'player' => $this->id, 'card' => $card));
+      $output = array('success' => $success, 'refresh' => array('ownhand', 'discard', 'lives', /*debug*/'players'));
     }
+    $this->draw();
+    return $output;
   }
   
   private function hint($playerplace, $hint) {
     if($playerplace != $this->playerplace) {
       if($this->game->decreaseHints()) {
-        $this->game->players[$playerplace]->receiveHint($hint);
+        $this->game->players[$playerplace]->receiveHint($this, $hint);
         return array('success' => true, 'refresh' => array('hints'));
       }
     }
     return array('success' => false);
   }
   
-  public function receiveHint($hint) {
-    //later
+  public function receiveHint($source, $hint) {
+    $match = array();
+    foreach($this->hand as $place => $card) {
+      if(is_numeric($hint)) {
+        if($hint == Deck::getCardNumber($card)) {
+          $match[] = $place;
+        }
+      } else {
+        if($hint == Deck::getCardColor($card)) {
+          $match[] = $place;
+        }
+      }
+    }
+    $this->game->log(array('event' => 'hint', 'player' => $source->id, 'receiver' => $this->id, 'match' => $match, 'hint' => $hint));
   }
   
 }

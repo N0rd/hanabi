@@ -16,6 +16,8 @@ Class Game {
   public $deck;
   public $builtpiles;
   public $discard;
+  public $log;
+  public $newlog;
   
   public function __construct($id = null) {
     if($id) {
@@ -53,7 +55,7 @@ Class Game {
     }
     foreach($this->players as $p) {
       for($i = 0; $i < $this->handsize; $i++) {
-        $p->draw();
+        $p->draw(true);
       }
     }
   }
@@ -95,6 +97,30 @@ Class Game {
     }
     foreach($this->players as $p) {
       $p->saveToDb($insert);
+    }
+    if($this->newlog) {
+      $query = DB::$db->prepare('INSERT INTO game_log SET gameid = :gameid, playerid = :playerid, event = :event, created = NOW(), data = :data');
+      $query->bindParam(':gameid', $this->id);
+      $query->bindParam(':data', $log);
+      $query->bindParam(':playerid', $playerid);
+      $query->bindParam(':event', $event);
+      foreach($this->newlog as $log) {
+        if(isset($log['player'])) {
+          $playerid = $log['player'];
+          unset($log['player']);
+        } else {
+          $playerid = null;
+        }
+        if(isset($log['event'])) {
+          $event = $log['event'];
+          unset($log['event']);
+        } else {
+          //should not happen
+          $event = '';
+        }
+        $log = json_encode($log);
+        $query->execute();
+      }
     }
   }
 
@@ -168,6 +194,7 @@ Class Game {
   
   public function loseLife() {
     $this->lives--;
+    $this->log(array('event' => 'loselife'));
     if($this->lives < 1) {
       //Game Over
     }
@@ -198,14 +225,29 @@ Class Game {
   public function increaseHints() {
     if($this->hints < $this->maxhints) {
       $this->hints++;
+      $this->log(array('event' => 'increasehints'));
     }
   }
   
   public function decreaseHints() {
     if($this->hints > 0) {
       $this->hints--;
+      $this->log(array('event' => 'decreasehints'));
       return true;
     }
     return false;
+  }
+  
+  public function log($log) {
+    $this->newlog[] = $log;
+  }
+  
+  public function getPlayerById($id) {
+    foreach($this->players as $player) {
+      if($player->id == $id) {
+        return $player;
+      }
+    }
+    return null;
   }
 }

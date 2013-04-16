@@ -12,15 +12,15 @@ Class Deck {
     ),
     'B' => array(
       'name' => 'Kék',
-      'color' => '0000FF',
+      'color' => '#0000FF',
     ),
     'Y' => array(
       'name' => 'Sárga',
-      'color' => 'FFFF00',
+      'color' => '#CCCC00',
     ),
     'W' => array(
       'name' => 'Fehér',
-      'color' => '#FFFFFF',
+      'color' => '#111111', //white is not visible on a white background
     ),
   );
 

@@ -9,11 +9,15 @@ function submitAction(action, param1, param2) {
       console.log(output);
       /*debug*/
       currentPlayerName = output.debug.players[output.debug.currentplayer].name;
-      console.log('Current player:' + currentPlayerName);
       setOwnTitle(output.debug.players[output.debug.currentplayer].name);
       if(output.refresh) {
         for(element in output.refresh) {
           refreshElement(element, output.refresh[element]);
+        }
+      }
+      if(output.logs) {
+        for(log in output.logs) {
+          addToLog(output.logs[log]);
         }
       }
     }
@@ -72,6 +76,12 @@ function showActions(actions) {
   }
 }
 
+
+function addToLog(log) {
+  var newLogDiv = $('<div class="logmessage"></div>').html(log);
+  $('#logandchat').append(newLogDiv);
+}
+
 function memoclick(input) {
 	var buttonName = input.src;
 	var buttonBegin = buttonName.slice(0, -5);
@@ -105,7 +115,6 @@ function fire() {
 	var selected = getSelectedCard();
 	if (selected != -1) {
     submitAction('build', selected);
-		alert('submit: ' + selected + '. lap fellövése!');
 		cancel();
 		return false;
 	} else {
@@ -126,7 +135,6 @@ function discard() {
 	var selected = getSelectedCard();
 	if (selected != -1) {
     submitAction('discard', selected);
-		alert('submit: ' + selected + '. lap eldobása!');
 		cancel();
 		return false;
 	} else {
@@ -162,7 +170,6 @@ function selectHintPlayer(targetPlayer, name) {
 
 function selectHintHint(hint) {
   submitAction('hint', hintTargetPlayer, hint);
-	alert('submit: Az összes ' + hint + ' megsúgása...');
 	cancel();
 	return false;
 }
