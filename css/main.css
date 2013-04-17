@@ -170,6 +170,14 @@
 	margin-top: 30px;
 }
 
+#logandchat .logmessage:nth-child(odd) {
+	background-color: #EEE;
+}
+
+#logandchat .logmessage:nth-child(even) {
+	background-color: #CCC;
+}
+
 .playerhand {
 	float: left;
 	width: 300px;

@@ -78,8 +78,7 @@ function showActions(actions) {
 
 function addToLog(log) {
   var newLogDiv = $('<div class="logmessage"></div>').html(log);
-	$('#logandchat').append(newLogDiv);  
-	
+	$('#logandchat').prepend(newLogDiv);
 }
 
 
