@@ -53,9 +53,10 @@ Class Game {
     } elseif ($this->playersnum == 4 or $this->playersnum == 5) {
       $this->handsize = 4;
     }
-    foreach($this->players as $p) {
-      for($i = 0; $i < $this->handsize; $i++) {
-        $p->draw(true);
+		// ezt itt muszáj volt átírni, egyesével osszuk a lapot a játékosoknak :)
+    for($i = 0; $i < $this->handsize; $i++) {
+	    foreach($this->players as $p) {
+        $p->draw(0);
       }
     }
   }

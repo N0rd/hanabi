@@ -33,14 +33,16 @@ Class Player {
     $query->execute();
   }
   
-  public function draw($initial = false) {
+  public function draw($where) {
     if(count($this->hand) < $this->game->handsize) {
       $card = $this->game->deck->draw();
-      $this->hand[] = $card;
       $this->reorder();
-      if(!$initial) {
+      if($from != 0) {
+	      $this->hand[$where] = $card;
         $this->game->log(array('event' => 'draw', 'player' => $this->id, 'card' => $card));
-      }
+      } else {
+				$this->hand[] = $card;
+			}
       return true;
     }
     return false;
@@ -75,7 +77,7 @@ Class Player {
     unset($this->hand[$cardplace]);
     $this->game->addToDiscard($card);
     $this->game->log(array('event' => 'discard', 'player' => $this->id, 'card' => $card));
-    $this->draw();
+    $this->draw($cardplace);
     $this->game->increaseHints();
     return array('success' => true, 'refresh' => array('ownhand', 'discard', 'hints', /*debug*/'players'));
   }
@@ -91,7 +93,7 @@ Class Player {
       $this->game->log(array('event' => 'firefail', 'player' => $this->id, 'card' => $card));
       $output = array('success' => $success, 'refresh' => array('ownhand', 'discard', 'lives', /*debug*/'players'));
     }
-    $this->draw();
+    $this->draw($cardplace);
     return $output;
   }
   
