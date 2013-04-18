@@ -1,16 +1,18 @@
 <div id="firstline">
 	<div id="own">
     <h2 id="ownname" class="element"><?php echo $game->players[$game->currentplayer]->name; ?></h2>
-    <div id="ownhand">
+    <div id="ownhand" class="actionbox">
       <?php echo $gamerender['ownhand']; ?>
     </div>
-    <div id="actionhints" class="displaynone">
-    <?php foreach($game->players as $player) { ?>
-      <input class="toplayer" type="button" value="<?php echo $player->name; ?>" data-playerplace="<?php echo $player->playerplace; ?>" />
-    <?php } ?>
+    <div id="actionhints" class="actionbox" style="display: none;">
+    <?php foreach($game->players as $player) { 
+			if ($player->id != $game->currentplayer) { ?>
+        <input class="toplayer" type="button" value="<?php echo $player->name; ?>" data-playerplace="<?php echo $player->playerplace; ?>" />
+      <?php 	}
+		} ?>
       <div class="linebrake">&nbsp;</div>
     </div>
-    <div id="actionhintwhat" class="displaynone">
+    <div id="actionhintwhat" class="actionbox" style="display: none;">
       <div id="hintcolors">
       <?php foreach($game->colors as $color => $data) { ?>
         <input class="hintselector" type="button" value="<?php echo $data['name']; ?>" data-id="<?php echo $color; ?>" /><br />
@@ -46,6 +48,7 @@
 </div>
 <div class="linebrake">&nbsp;</div>
 <div id="logandchat">
+	<?php krumo($game); ?>
 </div>
 <div id="players">
   <?php echo $gamerender['players']; ?>

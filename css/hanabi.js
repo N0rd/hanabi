@@ -78,8 +78,7 @@ function showActions(actions) {
 
 function addToLog(log) {
   var newLogDiv = $('<div class="logmessage"></div>').html(log);
-	$('#logandchat').append(newLogDiv);  
-	
+	$('#logandchat').prepend(newLogDiv);
 }
 
 
@@ -101,11 +100,11 @@ function cancel() {
   ownCardSelectMode = false;
   setOwnTitle(currentPlayerName);
   clearCardSelection();
-	document.getElementById('ownhand').className = '';
-	document.getElementById('actionhints').className = 'displaynone';
-	document.getElementById('actionhintwhat').className = ' displaynone';
+	$('#ownhand').show();
+	$('#actionhints').hide();
+	$('#actionhintwhat').hide();
   showActions(['fire', 'hint', 'discard']);
-	document.getElementById('hintButton').value = 'Súgás';
+	$('#hintButton').val('Súgás');
 	return false;
 }
 
@@ -149,9 +148,9 @@ function discard() {
 }
 
 function hint() {
-	document.getElementById('ownhand').className = 'displaynone';
-	document.getElementById('actionhints').className = 'displayshow';
-	document.getElementById('actionhintwhat').className = ' displaynone';
+	$('#ownhand').hide();
+	$('#actionhints').show();
+	$('#actionhintwhat').hide();
 	setOwnTitle('Kinek súgsz?');
   showActions(['cancel']);
 	return false;
@@ -159,11 +158,11 @@ function hint() {
 
 function selectHintPlayer(targetPlayer, name) {
 	hintTargetPlayer = targetPlayer;
-	document.getElementById('ownhand').className = 'displaynone';
-	document.getElementById('actionhints').className = 'displaynone';
-	document.getElementById('actionhintwhat').className = ' displayshow';
+	$('#ownhand').hide();
+	$('#actionhints').hide();
+	$('#actionhintwhat').show();
 	setOwnTitle('Mit súgsz? ' + name + ':');
-	document.getElementById('hintButton').value = 'Nem neki';
+	$('#hintButton').val('Nem neki');
   showActions(['hint', 'cancel']);
   return false;
 }

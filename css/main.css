@@ -19,7 +19,7 @@
 	line-height: 10px;
 	padding: 0px;
 	float: left;
-	margin: 3px 3px 20px 3px;
+	margin: 20px 3px 3px 3px;
 	border-radius: 10px;
 }
 
@@ -28,7 +28,7 @@
 }
 
 .owncard.selected {
-	margin: 20px 3px 3px 3px;
+	margin: 3px 3px 20px 3px;
 }
 
 .memo {
@@ -42,16 +42,13 @@
 	float: left;
 }
 
-.displayshow {
+.actionbox {
 	display: block;
 	float: left;
 	height: 160px;
 	width: 450px;	
 }
 
-.displaynone {
-	display: none;		
-}
 
 .toplayer {
 	display: block;
@@ -168,6 +165,14 @@
 	width: 450px;
 	height: 1000px;
 	margin-top: 30px;
+}
+
+#logandchat .logmessage:nth-child(odd) {
+	background-color: #EEE;
+}
+
+#logandchat .logmessage:nth-child(even) {
+	background-color: #CCC;
 }
 
 .playerhand {
