@@ -32,27 +32,31 @@
     <input class="action" type="button" id="hintButton" value="Súgás" />
     <input class="action" type="button" id="fireButton" value="Lövés" />
     <input class="action" type="button" id="discardButton" value="Dobás" />
-
 	</div>
-	<div id="board">
-		<div id="fireworks">
+  <div id="board">
+    <div id="fireworks">
       <?php echo $gamerender['fireworks']; ?>
-		</div>
-		<div id="hints">
+    </div>
+	  <div id="hints">
       <?php echo $gamerender['hints']; ?>
-		</div>
-		<div id="lives">
+	  </div>
+	  <div id="lives">
       <?php echo $gamerender['lives']; ?>
-		</div>
-	</div>
+	  </div>
+		<div id="deckbox">
+    	<?php echo $gamerender['deckbox']; ?>
+		</div>    
+  </div>
 </div>
 <div class="linebrake">&nbsp;</div>
-<div id="logandchat">
-	<?php krumo($game); ?>
-</div>
-<div id="players">
-  <?php echo $gamerender['players']; ?>
-</div>
-<div id="discard">
-  <?php echo $gamerender['discard']; ?>
+<div id="#secoundrow">
+  <div id="logandchat">
+    <?php krumo($gamerender['game']); ?>
+  </div>
+  <div id="players">
+    <?php echo $gamerender['players']; ?>
+  </div>
+  <div id="discard">
+    <?php echo $gamerender['discard']; ?>
+  </div>
 </div>

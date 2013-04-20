@@ -77,7 +77,7 @@ Class Player {
     $this->game->log(array('event' => 'discard', 'player' => $this->id, 'card' => $card));
     $this->draw();
     $this->game->increaseHints();
-    return array('success' => true, 'refresh' => array('ownhand', 'discard', 'hints', /*debug*/'players'));
+    return array('success' => true, 'refresh' => array('ownhand', 'discard', 'hints', 'deckbox', /*debug*/'players'));
   }
     
   private function build($cardplace) {
@@ -86,10 +86,10 @@ Class Player {
     $success = $this->game->buildPile($card);
     if($success) {
       $this->game->log(array('event' => 'firesuccess', 'player' => $this->id, 'card' => $card));
-      $output = array('success' => $success, 'refresh' => array('ownhand', 'fireworks', 'lives', /*debug*/'players'));
+      $output = array('success' => $success, 'refresh' => array('ownhand', 'fireworks', 'lives', 'deckbox', /*debug*/'players'));
     } else {
       $this->game->log(array('event' => 'firefail', 'player' => $this->id, 'card' => $card));
-      $output = array('success' => $success, 'refresh' => array('ownhand', 'discard', 'lives', /*debug*/'players'));
+      $output = array('success' => $success, 'refresh' => array('ownhand', 'discard', 'lives', 'deckbox', /*debug*/'players'));
     }
     $this->draw();
     return $output;

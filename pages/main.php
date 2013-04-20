@@ -31,6 +31,8 @@ $gamerender['fireworks'] = Template::renderElement('fireworks', $game);
 $gamerender['hints'] = Template::renderElement('hints', $game);
 $gamerender['lives'] = Template::renderElement('lives', $game);
 $gamerender['discard'] = Template::renderElement('discard', $game);
+$gamerender['deckbox'] = Template::renderElement('deckbox', $game);
+
 //we should rearrange these somehow
 $gamerender['game'] = $game;
 

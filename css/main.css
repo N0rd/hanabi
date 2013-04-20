@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 .element {
-	margin: 20px 0 10px 30px;
+	margin: 20px 0 10px 25px;
 }
 
 #own {
@@ -82,10 +82,16 @@
 
 #board {
 	float: left;
-	width: 560px;
+	width: 690px;
 	height: 260px;
 	margin-right: 20px;
 }
+
+#fireworks {
+	float: left;	
+	width: 540px;
+}
+
 
 #hints {
 	float: left;	
@@ -96,6 +102,27 @@
 	float: left;
 	width: 120px;
 	padding: 0 30px;
+}
+
+#deckbox {
+	width: 105px;
+	margin: 0 0 0 580px;
+}
+#deck {
+	width: 105px;
+	height: 140px;
+	background: url(../images/cards/back.gif) no-repeat;
+}
+
+#decknum {
+	color: #C90;
+	width: 50px;
+	margin: 65px 35px;
+	line-height: 135px;
+	font-size: 40px;
+	text-align: center;
+
+	text-align: center;
 }
 
 .cardplace, .cardtrash, .cardhand {
@@ -124,47 +151,17 @@
 	float: left;
 }
 
-#discard {
-	width: 500px;
-	padding: 0 0 0 60px;
-	float: left;
-}
-
-.discardrow {
-	clear: both;
-}
-
-.discardrow > img {
-	margin-top: -100px;
-}
-
-
-.discardrows {
-	clear: both;
-}
-
-.discardrow:first-child > img {
-	margin-top: 0px !important;
-}
-
-.cardtrash {
-	line-height: 16px;
-	font-size: 16px;
-	padding: 0;
-	text-align: left;
-	margin: 3px 3px 3px -55px;
-}
-
 .linebrake {
 	clear: both;	
 }
 
 #logandchat {
 	background-color: #EEE;
-	float: left;
-	width: 450px;
-	height: 1000px;
+	float: right;
+	width: 820px;
+	min-height: 1000px;
 	margin-top: 30px;
+	overflow: scroll;
 }
 
 #logandchat .logmessage:nth-child(odd) {
@@ -176,7 +173,6 @@
 }
 
 .playerhand {
-	float: left;
 	width: 300px;
 	padding-left: 80px;
 	height: 180px;
@@ -211,3 +207,28 @@
 .P {
 	background-color: #F0F;
 }
+
+#discard {
+	width: 300px;
+	margin: 0 0 100px 0;
+	padding: 0 0 0 80px;
+}
+
+.discardrow {
+	clear: left;
+}
+
+.discardrow > img{
+	margin-top: -100px;
+}
+
+.discardrow:first-child > img{
+	margin-top: 0px !important;
+}
+
+.cardtrash {
+	padding: 0;
+	text-align: left;
+	margin: 3px 3px 3px -55px;
+}
+
