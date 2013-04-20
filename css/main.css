@@ -31,9 +31,13 @@
 	margin: 3px 3px 20px 3px;
 }
 
-.memo {
+.memo, mimo {
 	width: 25px;
 	height: 25px;
+	padding: 0 5px;
+}
+
+.mimo { /*Hihetetlen...*/
 	padding: 0 5px;
 }
 
@@ -159,7 +163,7 @@
 	background-color: #EEE;
 	float: right;
 	width: 820px;
-	min-height: 1000px;
+	height: 1000px;
 	margin-top: 30px;
 	overflow: scroll;
 }

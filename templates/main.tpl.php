@@ -49,7 +49,7 @@
   </div>
 </div>
 <div class="linebrake">&nbsp;</div>
-<div id="#secoundrow">
+<div id="#secoundline">
   <div id="logandchat">
     <?php krumo($gamerender['game']); ?>
   </div>

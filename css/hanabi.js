@@ -30,7 +30,7 @@ function refreshElement(element, content) {
 
 $(document).ready(function(){
   ownCardSelectMode = false;
-  $('#ownhand').on('click', 'input', function(event) {
+  $('#ownhand').on('click', 'input.memo', function(event) {
     if(!ownCardSelectMode) {
       event.preventDefault();
       memoClick(this);
@@ -84,12 +84,12 @@ function addToLog(log) {
 
 function memoClick(input) {
 	var buttonName = input.src;
-	var buttonBegin = buttonName.slice(0, -5);
-	var buttonOld = buttonName.substr(-5, 1);
+	var buttonBegin = buttonName.slice(0, -7);
+	var buttonOld = buttonName.substr(-7, 3);
 	var buttonNew;
-	if (buttonOld == '-') {buttonNew = '1'};
-	if (buttonOld == '1') {buttonNew = '0'};
-	if (buttonOld == '0') {buttonNew = '-'};
+	if (buttonOld == 'unk') {buttonNew = 'thy'};
+	if (buttonOld == 'thy') {buttonNew = 'thn'};
+	if (buttonOld == 'thn') {buttonNew = 'unk'};
 	input.src = buttonBegin + buttonNew + '.gif';
 	input.value = buttonNew;
 	return false;
