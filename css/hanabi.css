@@ -135,6 +135,50 @@ span.nice {
    padding-bottom: 50px;
 } 
 
+.inputform {
+	padding: 30px 30px 30px 100px;
+}
+
+.inputlabel, .inputtext, .inputbutton, .inputlink {
+	display: inline-block;
+	width: 150px;
+	line-height: 24px;
+	font-size: 18px; 
+	margin: 5px;
+}
+
+.inputtext {
+	width: 250px;
+}
+
+.inputlink {
+	margin-top: 20px;	
+}
+
+.inputlegend {
+	display: block;
+	width: 350px;
+	line-height: 28px;
+	font-size: 24px; 
+	margin: 5px 5px 20px 5px;
+}
+
+.inputerror {
+	display: block;
+	padding: 5px 5px 20px 5px;
+	color: #F00;
+}
+
+.inputjs {
+	display: inline-block;
+	color: #F00;
+	line-height: 12px;
+	font-size: 12px;
+}
+.goodjs {
+	display: none;
+}
+
 #footer { 
    position: fixed;
    bottom: 0;

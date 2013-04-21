@@ -31,21 +31,21 @@ Class User {
   public function validate() {
     //TODO: check if name already exists
     if(!$this->name) {
-      $errors['name'] = 'Name must not be empty';
+      $errors['name'] = 'Minek nevezzelek?';
     }
     if(!$this->id && !$this->password1){
-      $errors['password1'] = 'Password must not be empty';
+      $errors['password1'] = 'Jelszó az kell, hogy legyen mit elfelejteni!';
     }
     if($this->password1 != $this->password2) {
-      $errors['password2'] = 'The two password is different';
+      $errors['password2'] = 'Nem sikerült ugyanazt a jelszót leírni mégegyszer!';
     }
     if($this->password1 && strlen($this->password1) < 5){
-      $errors['password1'] = 'Password must be at least 5 characters long';
+      $errors['password1'] = 'A jelszó legyen legalább 5 karakteres!';
     }
     if(!$this->email){
-      $errors['email'] = 'Email must not be empty';
+      $errors['email'] = 'Kell, hogy legyen email címed!';
     } else if(!validate_email($this->email)){
-      $errors['email'] = 'Incorrect email format';
+      $errors['email'] = 'Elgépelted az email címedet. ';
     }
     if(!isset($errors)) {
       return false;

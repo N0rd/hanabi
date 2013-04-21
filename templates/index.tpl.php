@@ -7,6 +7,7 @@
 <script type="text/javascript" src="css/hanabi.js"></script>
 <link href="css/hanabi.css" rel="stylesheet" type="text/css" />
 <link href="css/main.css" rel="stylesheet" type="text/css" />
+<link rel="icon" type="image/gif" href="images/icon.gif" />
 </head>
 <body>
 	<div id="container">

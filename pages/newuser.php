@@ -6,6 +6,7 @@ if(count($_POST)){
   $user->loadFromArray($_POST);
   if(!$errors = $user->validate()){
     $user->saveToDB();
+    header('Location: ?page=login');
   }
 }
 $parameters = array(
