@@ -3,10 +3,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Digitális Hanabi</title>
+<script type="text/javascript" src="css/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="css/hanabi.js"></script>
 <link href="css/hanabi.css" rel="stylesheet" type="text/css" />
 <link href="css/main.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="css/hanabi.js"></script>
 </head>
 <body>
 	<div id="container">

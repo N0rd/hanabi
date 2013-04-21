@@ -47,7 +47,6 @@ $(document).ready(function(){
   $('#hintButton').click(hint);
   $('#fireButton').click(fire);
   $('#discardButton').click(discard);
-
   $('#actionhints').on('click', '.toplayer', function() {
     selectHintPlayer($(this).attr('data-playerplace'), $(this).val());
   });
@@ -81,11 +80,11 @@ function addToLog(log) {
 	$('#logandchat').prepend(newLogDiv);
 }
 
-
 function memoClick(input) {
 	var buttonName = input.src;
-	var buttonBegin = buttonName.slice(0, -7);
-	var buttonOld = buttonName.substr(-7, 3);
+	var size = buttonName.length;
+	var buttonBegin = buttonName.slice(0, size-7);
+	var buttonOld = buttonName.substr(size-7, 3);
 	var buttonNew;
 	if (buttonOld == 'unk') {buttonNew = 'thy'};
 	if (buttonOld == 'thy') {buttonNew = 'thn'};

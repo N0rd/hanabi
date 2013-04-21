@@ -7,7 +7,8 @@
 
 body {
 	font: 100% Verdana, Arial, Helvetica, sans-serif;
-	background: url(../images/back.jpg) repeat-x;
+	width: 1250px;
+	background: #B25900;
 }
 
 #container {
