@@ -3,23 +3,23 @@
 Class Deck {
   public static $basicColors = array(
     'R' => array(
-      'name' => 'Piros',
+      'name' => 'piros',
       'color' => '#FF0000',
     ),
     'G' => array(
-      'name' => 'Zöld',
+      'name' => 'zöld',
       'color' => '#00FF00',
     ),
     'B' => array(
-      'name' => 'Kék',
+      'name' => 'kék',
       'color' => '#0000FF',
     ),
     'Y' => array(
-      'name' => 'Sárga',
-      'color' => '#CCCC00',
+      'name' => 'sárga',
+      'color' => '#DDDD00',
     ),
     'W' => array(
-      'name' => 'Fehér',
+      'name' => 'fehér',
       'color' => '#111111', //white is not visible on a white background
     ),
   );

@@ -6,7 +6,7 @@
     </div>
     <div id="actionhints" class="actionbox" style="display: none;">
     <?php foreach($game->players as $player) { 
-			if ($player->id != $game->currentplayer) { ?>
+			if ($player->id != $game->players[$game->currentplayer]->id) { ?>
         <input class="toplayer" type="button" value="<?php echo $player->name; ?>" data-playerplace="<?php echo $player->playerplace; ?>" />
       <?php 	}
 		} ?>
@@ -51,7 +51,6 @@
 <div class="linebrake">&nbsp;</div>
 <div id="#secoundline">
   <div id="logandchat">
-    <?php krumo($gamerender['game']); ?>
   </div>
   <div id="players">
     <?php echo $gamerender['players']; ?>

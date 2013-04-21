@@ -28,7 +28,23 @@ Class Template {
       default: return '';
     }
   }
-
+	
+	public static function numberText($number) {
+		if ($number == 1) {
+      return 'egyes';
+		} elseif ($number ==  2) {
+      return 'kettes';
+		} elseif ($number ==  3) {
+      return 'hármas';
+	  } elseif ($number == 4) {
+      return 'négyes';
+		} elseif ($number ==  5) {
+      return 'ötös';
+		} else {
+			return 'bug';
+		}
+	}
+  
   public static function renderLog($log, $game) {
     if(isset($log['player'])) {
       $player = $game->getPlayerById($log['player'])->name;
@@ -38,28 +54,62 @@ Class Template {
         $receiverplayer = $game->getPlayerById($log['receiver'])->name;
         $match = array();
         foreach($log['match'] as $place) {
-          $match[] = $place + 1;
+          if ($place == 0) {$match[] = 'az első';}
+          if ($place == 1) {$match[] = 'a második';}
+          if ($place == 2) {$match[] = 'a harmadik';}
+          if ($place == 3) {$match[] = 'a negyedik';}
+          if ($place == 4) {$match[] = 'az ötödik';}					
         }
-        $match = implode(', ', $match);
-        if(is_numeric($log['hint'])) {
-          $hint = '<strong>'.$log['hint'].'</strong>';
+				if (is_numeric($log['hint'])) {
+					$hint = '<strong>'.Template::numberText($log['hint']).'</strong>';
         } else {
           $color = $game->colors[$log['hint']];
           $hint = Template::fontColor($color['color'], $color['name']);
         }
-        return $player.' súgott neki: '.$receiverplayer.'<br />Az alábbi lapjai '.$hint.': '.$match;
-      case 'loselife': return '<strong>Elvesztettetek egy életet!</strong>';
-      case 'increasehints': return 'Kaptatok egy súgási lehetőséget';
-      case 'decreasehints': return 'Elhasználtatok egy súgási lehetőséget';
-      case 'draw': return $player.' húzott egy lapot';
+				$text = $receiverplayer.': ';
+				if (empty($match)) {
+					$text .= 'nincs'.$hint.'lapod';
+				} else {
+					$i = 0;
+					while ($i < count($match)-1) {
+	        	$text .= $match[$i].', ';
+						$i++;
+					}
+					if ($i >= 1) {
+						$text .= ' és ';
+					}
+					$text .=$match[$i].' lapod '.$hint;
+				}
+        return $text.'.<br />'.$player.' elhasznált egy súgási lehetőséget.';
+      case 'decreasehints':
+				// todb? Elhasználtak egy súgási lehetőséget;
+				return false;
       case 'firesuccess':
         $color = $game->colors[Deck::getCardColor($log['card'])];
-        return $player.' sikeresen fellőtt egy '.Template::fontColor($color['color'], $color['name']).' tüzijátékrakétát';
-      case 'firefail': return $player.' elrontott egy kilövést';
+				$number = Template::numberText(Deck::getCardNumber($log['card']));
+        return $player.' sikeresen fellőtt egy '.Template::fontColor($color['color'], $color['name'].' '.$number).' tüzijáték rakétát.<br />'
+				     . $player.' húzott egy lapot.';
+      case 'firefail':
+        $color = $game->colors[Deck::getCardColor($log['card'])];
+				$number = Template::numberText(Deck::getCardNumber($log['card']));		
+	      return $player.' elrontott egy '.Template::fontColor($color['color'], $color['name'].' '.$number).' kilövését.<br />'		     
+						 . 'Elveszítettetek egy életet.<br />'
+						 . $player.' húzott egy lapot.';				
+      case 'loselife':
+				//todb? Elvesztettek egy életet;
+			  return false;
       case 'discard':
         $color = $game->colors[Deck::getCardColor($log['card'])];
-        $number = Deck::getCardNumber($log['card']);
-        return $player.' eldobott egy lapot: '.Template::fontColor($color['color'], $color['name'].' '.$number);
+				$number = Template::numberText(Deck::getCardNumber($log['card']));
+        return $player.' eldobott egy '.Template::fontColor($color['color'], $color['name'].' '.$number).'t.<br />'
+				     . 'Kaptatok egy súgási lehetőséget.<br />'
+				     . $player.' húzott egy lapot.';
+      case 'increasehints':
+				//todb? Kaptak egy súgási lehetőséget; 
+				return false;
+      case 'draw':
+				//todb? $player húzott egy $log['card'];
+				return false;
       default: return json_encode($log, true);
     }
   }
