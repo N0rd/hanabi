@@ -65,7 +65,7 @@ body {
 	padding: 0 20px;
 }
 
-p {
+p.rulesp {
 	margin: 0 50px 10px 50px;
 }
 
@@ -77,23 +77,21 @@ p.example {
 	font-style: italic;
 }
 
+p.last {
+	margin: 0 50px 100px 50px;
+}
+
 h3 {
-	margin: 10px 20px 10px 20px;
+	margin: 20px 20px 10px 20px;
 	line-height: 1.3em;
 	font-size: 1.3em;
 }
 
 h4 {
-	margin: 10px 30px 10px 30px;
+	margin: 20px 30px 10px 30px;
 	line-height: 1em;
 	font-size: 1em;
 }
-
-ul {
-	margin: 0 50px 20px 85px;
-	line-height: 1em;
-}
-
 
 ol.abc {
 	margin: 0 50px 20px 85px;
@@ -101,11 +99,23 @@ ol.abc {
 	list-style-type: lower-latin;
 }
 
-ol {
+ol.rulesol {
 	margin: 0 50px 20px 85px;
 	line-height: 1em;
 	list-style-type: decimal;
 }
+
+ul.rulesul {
+	margin: 0 50px 15px 70px;
+	line-height: 1em;
+}
+
+ul.rulesul > li {
+	padding: 5px 15px;
+	line-height: 1em;
+	list-style-type: circle;	
+}
+
 
 table.rules {
 	margin: 0 50px 20px 85px;
@@ -114,14 +124,13 @@ table.rules {
 
 table.rules th {
 	padding: 0 5px;
-	width: 80px;
 	text-align: right;
 	
 }
 
 table.rules td {
 	padding: 0 5px;
-	
+	text-align: left;
 }
 
 
@@ -175,6 +184,11 @@ span.nice {
 	line-height: 12px;
 	font-size: 12px;
 }
+
+.beforjs {
+	visibility: hidden;
+}
+
 .goodjs {
 	display: none;
 }

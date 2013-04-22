@@ -1,4 +1,4 @@
-<h2 class="element">Súgások</h2>
+<h2 class="element">Utalások</h2>
 <?php for($i = 0; $i < $available; $i++) { ?>
 <img class="marker" src="images/hint.gif" alt="+" />
 <?php } ?>
