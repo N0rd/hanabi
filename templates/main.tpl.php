@@ -15,14 +15,16 @@
     <div id="actionhintwhat" class="actionbox" style="display: none;">
       <div id="hintcolors">
       <?php foreach($game->colors as $color => $data) { ?>
-        <input class="hintselector" type="button" value="<?php echo $data['name']; ?>" data-id="<?php echo $color; ?>" /><br />
+        <input class="hintselector" type="button" value="<?php echo $data['name']; ?>" id="data-<?php echo $color; ?>" />
+        <label class="hinthelp" for="data-<?php echo $color; ?>">&nbsp;</label><br />
       <? } ?>
       </div>
       <div id="hintnumbers">
       <?php
       $maxnumber = Deck::getMaxNumber();
       for($number = 1; $number <= $maxnumber; $number++) { ?>
-        <input class="hintselector" type="button" value="<?php echo $number; ?>" data-id="<?php echo $number; ?>" /><br />
+        <input class="hintselector" type="button" value="<?php echo $number; ?>" id="data-<?php echo $number; ?>" />
+        <label class="hinthelp" for="data-<?php echo $number; ?>">&nbsp;</label><br />
       <? } ?>
       </div>
       <div class="linebrake">&nbsp;</div>

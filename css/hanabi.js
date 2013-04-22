@@ -98,7 +98,8 @@ $(document).ready(function(){
     selectHintPlayer($(this).attr('data-playerplace'), $(this).val());
   });
   $('#actionhintwhat').on('click', '.hintselector', function(){
-    selectHintHint($(this).attr('data-id'));
+    var hintdata = $(this).attr('id');  
+		selectHintHint(hintdata.substr(5,1));
   });
   currentPlayerName = $('#ownname').html();
 });
@@ -203,11 +204,17 @@ function hint() {
 }
 
 function selectHintPlayer(targetPlayer, name) {
-	hintTargetPlayer = targetPlayer;
+	hintTargetPlayer = targetPlayer; 	 //??? ez pont annak a kezdeménye akar lenni ami nekem is hiányzik?
+	var targetPlayerId = 16;          // mivel én nem tudom beazonosítani a cél játékos id-jét innen js-ből
+	var targetArea = 'player'+targetPlayerId+'hand';
 	$('#ownhand').hide();
 	$('#actionhints').hide();
 	$('#actionhintwhat').show();
-	setOwnTitle('Mit súgsz? ' + name + ':');
+	setOwnTitle('Mit súgsz? <br />' + name + ':');
+	$('.hinthelp').html(function() {
+			var text = $(this).attr('for').substr(5,1);
+			return text;
+		});
 	$('#hintButton').val('Nem neki');
   showActions(['hint', 'cancel']);
   return false;
