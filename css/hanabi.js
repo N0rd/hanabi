@@ -49,15 +49,17 @@ $(document).ready(function(){
 			$('#inputemail').removeAttr('disabled');
 		}
 		else{
+			$('#jsname').removeClass('beforjs');
 			$('#jsname').removeClass('goodjs');
 		}		
 	});
 	$('#inputemail').on('keyup', function(){
-		if (/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]*)$/.test($('#inputemail').val())){
+		if (/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]{2,})+$/.test($('#inputemail').val())){
 			$('#jsemail').addClass('goodjs');
 			$('#inputpassword1').removeAttr('disabled');
 		}
 		else{
+			$('#jsemail').removeClass('beforjs');
 			$('#jsemail').removeClass('goodjs');
 		}		
 	});
@@ -67,6 +69,7 @@ $(document).ready(function(){
 			$('#inputpassword2').removeAttr('disabled');
 		}
 		else{
+			$('#jspass1').removeClass('beforjs');
 			$('#jspass1').removeClass('goodjs');
 		}		
 	});	
@@ -75,6 +78,7 @@ $(document).ready(function(){
 			$('#jspass2').addClass('goodjs');
 		}
 		else{
+			$('#jspass2').removeClass('beforjs');
 			$('#jspass2').removeClass('goodjs');
 		}		
 	});	
