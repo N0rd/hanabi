@@ -87,9 +87,24 @@ $(document).ready(function(){
 			return true;
 		} else {
 			return false;
+		}		
+	});
+	$('.hintselector').on('mouseover', function(event){
+		var property = $(this).attr('id').substr(5,1);
+		var playerHand = '#player'+hintTargetPlayer+'hand';
+		if (isNaN(property)){
+			var selectedImg ='img[class="cardhand '+property+'"]';
+			$(playerHand).children(selectedImg).addClass('marked');
+		} else {
+			var selectedImg ='img[alt="'+property+'"]';
+			$(playerHand).children(selectedImg).addClass('marked');
 		}
-		
-	});	
+		return false;
+	});
+		$('.hintselector').on('mouseout', function(event){
+			var playerHand = '#player'+hintTargetPlayer+'hand';			
+			$(playerHand).children('img').removeClass('marked');
+	});
   $('#cancelButton').click(cancel);
   $('#hintButton').click(hint);
   $('#fireButton').click(fire);

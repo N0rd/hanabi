@@ -29,9 +29,9 @@ Class Game {
       $this->status = 1;
       $this->playersnum = 0;
       $this->currentplayer = 0;
-      $this->addplayer(array('name' => 'Player 4', 'id' => 4));
-      $this->addplayer(array('name' => 'Player 5', 'id' => 5));
-      $this->addplayer(array('name' => 'Player 16', 'id' => 16));
+      $this->addplayer(array('name' => 'Anita', 'id' => 4));
+      $this->addplayer(array('name' => 'Nord', 'id' => 1));
+      $this->addplayer(array('name' => 'Gyulus', 'id' => 42));
   	  $this->variant = 'normal';
       $this->colors = Deck::getColorsByVariant($this->variant);
       $this->getMaxHints();

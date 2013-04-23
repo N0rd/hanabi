@@ -6,9 +6,9 @@
     </div>
     <div id="actionhints" class="actionbox" style="display: none;">
     <?php foreach($game->players as $player) { 
-			if ($player->id != $game->players[$game->currentplayer]->id) { ?>
+			//if ($player->id != $game->players[$game->currentplayer]->id) { ?>
         <input class="toplayer" type="button" value="<?php echo $player->name; ?>" data-playerplace="<?php echo $player->playerplace; ?>" />
-      <?php 	}
+      <?php 	// amíg tesztelünk, nem kell}
 		} ?>
       <div class="linebrake">&nbsp;</div>
     </div>
