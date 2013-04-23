@@ -4,17 +4,24 @@ Class Player {
   private $game;
   public $id; 
   public $hand;
+  public $info;
   public $name;
   public $playerplace;
   public $current;
   
-  public function __construct($game, $id, $name, $playerplace, $hand = array(), $current = false) {
-    $this->game = $game;
+  public function __construct($game, $id, $name = '', $playerplace = null, $hand = array(), $current = false) {
     $this->id = $id;
-    $this->hand = $hand;
-    $this->name = $name;
-    $this->playerplace = $playerplace;
-    $this->current = $current;
+    if(is_object($game)) {
+      $this->game = $game;
+      $this->hand = $hand;
+      $this->name = $name;
+      $this->playerplace = $playerplace;
+      $this->current = $current;
+    } else {
+      $this->game = new Game();
+      $this->game->id = $game;
+      $this->loadFromDb();
+    }
   }
   
   public function saveToDb($insert) {
@@ -31,6 +38,24 @@ Class Player {
     $hand = json_encode($this->hand);
     $query->bindParam(':hand', $hand);
     $query->execute();
+  }
+  
+  public function loadFromDb() {
+    $query = DB::$db->prepare('SELECT * FROM game_player WHERE gameid = :gameid AND playerid = :playerid');
+    $query->bindParam(':gameid', $this->game->id);
+    $query->bindParam(':playerid', $i);
+    $query->execute();
+    if($player = $query->fetch()) {
+      //$this->hand = json_decode($player['hand']);
+      $this->info = get_object_vars(json_decode($player['hand']));
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  public function setInfo($card, $info) {
+  
   }
   
   public function draw($initial = false) {
