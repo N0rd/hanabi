@@ -218,6 +218,11 @@
 	background-color: #F0F;
 }
 
+.marked {
+	margin: -12px 3px 3px -40px;
+}
+
+
 #discard {
 	width: 300px;
 	margin: 0 0 100px 0;
