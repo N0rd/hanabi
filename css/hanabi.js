@@ -16,9 +16,7 @@ function submitAction(action, param1, param2) {
         }
       }
       if(output.logs) {
-        for(log in output.logs) {
-          addToLog(output.logs[log]);
-        }
+        addToLog(output.logs);
       }
     }
   });
@@ -138,8 +136,11 @@ function showActions(actions) {
   }
 }
 
-function addToLog(log) {
-  var newLogDiv = $('<div class="logmessage"></div>').html(log);
+function addToLog(logs) {
+  var newLogDiv = $('<div class="logmessage"></div>');
+  for(log in logs) {
+    newLogDiv.append(logs[log] + '<br />');
+  }
 	$('#logandchat').prepend(newLogDiv);
 }
 

@@ -80,36 +80,27 @@ Class Template {
 					}
 					$text .=$match[$i].' lapod '.$hint;
 				}
-        return $text.'.<br />'.$player.' elhasznált egy súgási lehetőséget.';
+        return $text;
       case 'decreasehints':
-				// todb? Elhasználtak egy súgási lehetőséget;
-				return false;
+				return 'Elhasználtatok egy súgási lehetőséget.';
       case 'firesuccess':
         $color = $game->colors[Deck::getCardColor($log['card'])];
 				$number = Template::numberText(Deck::getCardNumber($log['card']));
-        return $player.' sikeresen fellőtt egy '.Template::fontColor($color['color'], $color['name'].' '.$number).' tüzijáték rakétát.<br />'
-				     . $player.' húzott egy lapot.';
+        return $player.' sikeresen fellőtt egy '.Template::fontColor($color['color'], $color['name'].' '.$number).' tüzijáték rakétát.';
       case 'firefail':
         $color = $game->colors[Deck::getCardColor($log['card'])];
 				$number = Template::numberText(Deck::getCardNumber($log['card']));		
-	      return $player.' elrontott egy '.Template::fontColor($color['color'], $color['name'].' '.$number).' kilövését.<br />'		     
-						 . 'Közeleg a vihar.<br />'
-						 . $player.' húzott egy lapot.';				
+	      return $player.' elrontott egy '.Template::fontColor($color['color'], $color['name'].' '.$number).' kilövését.';
       case 'loselife':
-				//todb? Elvesztettek egy életet;
-			  return false;
+			  return 'Közeleg a vihar.';
       case 'discard':
         $color = $game->colors[Deck::getCardColor($log['card'])];
 				$number = Template::numberText(Deck::getCardNumber($log['card']));
-        return $player.' eldobott egy '.Template::fontColor($color['color'], $color['name'].' '.$number).'t.<br />'
-				     . 'Kaptatok egy súgási lehetőséget.<br />'
-				     . $player.' húzott egy lapot.';
+        return $player.' eldobott egy '.Template::fontColor($color['color'], $color['name'].' '.$number).'t.';
       case 'increasehints':
-				//todb? Kaptak egy súgási lehetőséget; 
-				return false;
+				return 'Kaptatok egy súgási lehetőséget.';
       case 'draw':
-				//todb? $player húzott egy $log['card'];
-				return false;
+				return $player.' húzott egy lapot.';
       default: return json_encode($log, true);
     }
   }
