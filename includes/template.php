@@ -68,7 +68,7 @@ Class Template {
         }
 				$text = $receiverplayer.': ';
 				if (empty($match)) {
-					$text .= 'nincs'.$hint.'lapod';
+					$text .= 'nincs '.$hint.' lapod';
 				} else {
 					$i = 0;
 					while ($i < count($match)-1) {
@@ -93,7 +93,7 @@ Class Template {
         $color = $game->colors[Deck::getCardColor($log['card'])];
 				$number = Template::numberText(Deck::getCardNumber($log['card']));		
 	      return $player.' elrontott egy '.Template::fontColor($color['color'], $color['name'].' '.$number).' kilövését.<br />'		     
-						 . 'Elveszítettetek egy életet.<br />'
+						 . 'Közeleg a vihar.<br />'
 						 . $player.' húzott egy lapot.';				
       case 'loselife':
 				//todb? Elvesztettek egy életet;
