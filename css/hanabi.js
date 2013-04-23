@@ -148,13 +148,20 @@ function memoClick(input) {
 	var size = buttonName.length;
 	var buttonBegin = buttonName.slice(0, size-7);
 	var buttonOld = buttonName.substr(size-7, 3);
-	var buttonNew;
-	if (buttonOld == 'unk') {buttonNew = 'thy'};
-	if (buttonOld == 'thy') {buttonNew = 'thn'};
-	if (buttonOld == 'thn') {buttonNew = 'unk'};
-	input.src = buttonBegin + buttonNew + '.gif';
-	input.value = buttonNew;
-	return false;
+  var card = $(input).parent().index();
+  var info = $(input).attr('name');
+  $.ajax({
+    url: 'ownhand.php',
+    data: {card: card, info: info},
+    type: 'post',
+    dataType: 'json',
+    success: function(output) {
+      if(output.status) {
+        input.src = buttonBegin + output.info + '.gif';
+        input.value = output.info;
+      }
+    }
+  });
 }
 
 function cancel() {

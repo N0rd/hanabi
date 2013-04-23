@@ -151,10 +151,11 @@ Class Game {
       $query->execute();
       while($p = $query->fetch()) {
         $hand = json_decode($p['hand']);
+        $info = Player::decodeInfo($p['info']);
         //later, name will be loaded from users table
         $name = 'Player '.$p['playerid'];
         $current = ($p['order'] == $this->currentplayer);
-        $this->players[] = new Player($this, $p['playerid'], $name, $p['order'], $hand, $current);
+        $this->players[] = new Player($this, $p['playerid'], $name, $p['order'], $hand, $info, $current);
       }
       return true;
     } else {
@@ -251,5 +252,21 @@ Class Game {
       }
     }
     return null;
+  }
+  
+  public function getInfoKeys() {
+    $colors = array_keys($this->colors);
+    $numbers = array_keys(Deck::$numbers);
+    $max = max(count($colors), count($numbers));
+    $keys = array();
+    for($i = 0; $i < $max; $i++) {
+      if(isset($colors[$i])) {
+        $keys[] = $colors[$i];  
+      }
+      if(isset($numbers[$i])) {
+        $keys[] = $numbers[$i];  
+      }
+    }
+    return $keys;
   }
 }
