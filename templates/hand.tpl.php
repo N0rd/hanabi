@@ -1,4 +1,4 @@
-<div class="playerhand" id="player<?php echo $player->id; ?>hand">
+<div class="playerhand" id="player<?php echo $player->playerplace; ?>hand">
   <h2 class="element"><?php echo $player->name; ?></h2>
   <?php foreach($player->hand as $card) { 
     //Imageless help hack:

@@ -13,6 +13,7 @@
       <div class="linebrake">&nbsp;</div>
     </div>
     <div id="actionhintwhat" class="actionbox" style="display: none;">
+    	<input type="hidden" id="targetplayerhand" value="" />
       <div id="hintcolors">
       <?php foreach($game->colors as $color => $data) { ?>
         <input class="hintselector" type="button" value="<?php echo $data['name']; ?>" id="data-<?php echo $color; ?>" />

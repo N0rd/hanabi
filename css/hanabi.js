@@ -204,15 +204,33 @@ function hint() {
 }
 
 function selectHintPlayer(targetPlayer, name) {
-	hintTargetPlayer = targetPlayer; 	 //??? ez pont annak a kezdeménye akar lenni ami nekem is hiányzik?
-	var targetPlayerId = 16;          // mivel én nem tudom beazonosítani a cél játékos id-jét innen js-ből
-	var targetArea = 'player'+targetPlayerId+'hand';
+	hintTargetPlayer = targetPlayer;      
 	$('#ownhand').hide();
 	$('#actionhints').hide();
 	$('#actionhintwhat').show();
 	setOwnTitle('Mit súgsz? <br />' + name + ':');
+	var targetPlayerHand = '#player'+targetPlayer+'hand';
 	$('.hinthelp').html(function() {
-			var text = $(this).attr('for').substr(5,1);
+			var labelFor = $(this).attr('for').substr(5,1);
+			var finded = new Array(), text;
+			if (isNaN(labelFor)){
+					$(targetPlayerHand + ' img').each(function() {
+            if ($(this).attr('class').substr(9,1) ==  labelFor) {
+							finded.push($(this).index());
+						}
+					});
+			} else {
+					$(targetPlayerHand + ' img').each(function() {
+            if ($(this).attr('alt') ==  labelFor) {
+	 						finded.push($(this).index());
+						}
+					});
+			}
+			if (finded.length == 0) {
+				text = 'nincs';
+			} else {
+				text = finded.join('., ')+'.';
+			}
 			return text;
 		});
 	$('#hintButton').val('Nem neki');
