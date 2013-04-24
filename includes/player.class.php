@@ -9,13 +9,12 @@ Class Player {
   public $playerplace;
   public $current;
   
-  public function __construct($game, $id, $name = '', $playerplace = null, $hand = array(), $info = array(), $current = false) {
+  public function __construct($game, $id, $playerplace = null, $hand = array(), $info = array(), $current = false) {
     $this->id = $id;
     if(is_object($game)) {
       $this->game = $game;
       $this->hand = $hand;
       $this->info = $info;
-      $this->name = $name;
       $this->playerplace = $playerplace;
       $this->current = $current;
     } else {
@@ -23,6 +22,16 @@ Class Player {
       $this->game->id = $game;
       $this->loadFromDb();
     }
+  }
+  
+  //this will be cached in session later
+  public static function getUserName($id) {
+    $query = DB::$db->prepare('SELECT name FROM users WHERE id = :id');
+    $query->bindParam(':id', $id);
+    if($name = $query->fetch()) {
+      return $name['name'];
+    }
+    return '';
   }
   
   public function saveToDb($insert = false) {

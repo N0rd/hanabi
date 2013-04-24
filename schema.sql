@@ -4,17 +4,19 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `games`;
 CREATE TABLE IF NOT EXISTS `games` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `creator` int(11) unsigned NOT NULL,
   `status` tinyint(1) unsigned NOT NULL COMMENT '0:not started, 1:going, 2:finished',
-  `variant` varchar(10) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `turn` int(3) unsigned NOT NULL,
+  `variant` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `handsize` tinyint(1) unsigned NOT NULL,
   `playersnum` tinyint(1) unsigned NOT NULL,
   `currentplayer` tinyint(1) unsigned NOT NULL,
   `lives` tinyint(2) unsigned NOT NULL,
   `hints` tinyint(2) unsigned NOT NULL,
-  `deck` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `builtpiles` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `discard` text CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `deck` text COLLATE utf8_unicode_ci,
+  `builtpiles` text COLLATE utf8_unicode_ci,
+  `discard` text COLLATE utf8_unicode_ci,
   `created` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

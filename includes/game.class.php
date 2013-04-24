@@ -19,41 +19,34 @@ Class Game {
   public $log;
   public $newlog;
   
-  public function __construct($id = null) {
+  public function __construct($id = null, $name = '', $playersnum = 0) {
     if($id) {
       $this->loadFromDB($id);
     } else {
-      //test data, later filled in lobby
       $this->id = null;
-      $this->name = 'Test Game';
+      $this->name = $name;
       $this->status = 1;
-      $this->playersnum = 0;
+      $this->playersnum = $playersnum;
       $this->currentplayer = 0;
-      $this->addplayer(array('name' => 'Anita', 'id' => 4));
-      $this->addplayer(array('name' => 'Nord', 'id' => 1));
-      $this->addplayer(array('name' => 'Gyulus', 'id' => 42));
   	  $this->variant = 'normal';
       $this->colors = Deck::getColorsByVariant($this->variant);
       $this->getMaxHints();
       $this->hints = $this->maxhints;
+      $this->deck = new Deck(null, $this->variant);  
+      $this->lives = $this->getMaxLives();
+      $this->discard = array();
+      if ($this->playersnum < 4) {
+        $this->handsize = 5;
+      } else {
+        $this->handsize = 4;
+      }
     }
   }
   
   public function start() {
-    $this->deck = new Deck(null, $this->variant);
-    $this->lives = $this->getMaxLives();
-    $this->discard = array();
-    
     foreach($this->colors as $cid => $c) {
       $this->builtpiles[$cid] = 0;
     }
-    // játékoslétszámtól függ a kézben tartott lapok száma
-    if ($this->playersnum == 2 or $this->playersnum == 3) {
-      $this->handsize = 5;
-    } elseif ($this->playersnum == 4 or $this->playersnum == 5) {
-      $this->handsize = 4;
-    }
-
     // ezt itt muszáj volt átírni, egyesével osszuk a lapot a játékosoknak :)
     for($i = 0; $i < $this->handsize; $i++) {
       foreach($this->players as $p) {
