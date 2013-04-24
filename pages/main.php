@@ -4,7 +4,7 @@ if(isset($_GET['id'])) {
   //TODO: check if user is present in this game
   $game = new Game($_GET['id']);
 } else {
-  header('?page=lobby');
+  header('Location: ?page=lobby');
 }
 $_SESSION['currentgame'] = $game->id;
 //TODO: separate own hand

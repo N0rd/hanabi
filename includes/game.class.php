@@ -25,7 +25,7 @@ Class Game {
     } else {
       $this->id = null;
       $this->name = $name;
-      $this->status = 1;
+      $this->status = 0;
       $this->playersnum = $playersnum;
       $this->currentplayer = 0;
   	  $this->variant = 'normal';
@@ -34,19 +34,20 @@ Class Game {
       $this->hints = $this->maxhints;
       $this->deck = new Deck(null, $this->variant);  
       $this->lives = $this->getMaxLives();
+      $this->builtpiles = array();
       $this->discard = array();
       if ($this->playersnum < 4) {
         $this->handsize = 5;
       } else {
         $this->handsize = 4;
       }
+      foreach($this->colors as $cid => $c) {
+        $this->builtpiles[$cid] = 0;
+      }
     }
   }
   
   public function start() {
-    foreach($this->colors as $cid => $c) {
-      $this->builtpiles[$cid] = 0;
-    }
     // ezt itt muszáj volt átírni, egyesével osszuk a lapot a játékosoknak :)
     for($i = 0; $i < $this->handsize; $i++) {
       foreach($this->players as $p) {
@@ -55,12 +56,19 @@ Class Game {
     }
   }
   
-  public function addplayer($player, $playerplace = null) {
+  public function addplayer($playerid, $playerplace = null) {
     if($playerplace == null) {
       $playerplace = count($this->players);
     }
-    $this->players[] = new Player($this, $player['id'], $player['name'], $playerplace);
-    $this->playersnum += 1;
+    if(count($this->players)) {
+      foreach($this->players as $p) {
+        if($p->id == $playerid) {
+          return false;
+        }
+      }
+    }
+    $this->players[] = new Player($this, $playerid, $playerplace);
+    return true;
   }
   
   public function saveToDB() {
@@ -136,7 +144,11 @@ Class Game {
       $deck = json_decode($game['deck']);
       $this->deck = new Deck($deck);
       $this->builtpiles = get_object_vars(json_decode($game['builtpiles']));
-      $this->discard = get_object_vars(json_decode($game['discard']));
+      if(is_object($this->discard)){
+        $this->discard = get_object_vars(json_decode($game['discard']));
+      } else {
+        $this->discard = array();
+      }
       $this->colors = Deck::getColorsByVariant($this->variant);
       $this->getMaxHints();
       $query = DB::$db->prepare('SELECT * FROM game_player WHERE gameid = :id ORDER BY `order`');
@@ -146,9 +158,8 @@ Class Game {
         $hand = json_decode($p['hand']);
         $info = Player::decodeInfo($p['info']);
         //later, name will be loaded from users table
-        $name = 'Player '.$p['playerid'];
         $current = ($p['order'] == $this->currentplayer);
-        $this->players[] = new Player($this, $p['playerid'], $name, $p['order'], $hand, $info, $current);
+        $this->players[] = new Player($this, $p['playerid'], $p['order'], $hand, $info, $current);
       }
       return true;
     } else {

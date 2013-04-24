@@ -14,5 +14,6 @@ if(count($_POST)){
   $game->creator = $_SESSION['user']['id'];
   $game->addplayer($_SESSION['user']['id']);
   $game->saveToDb();
+  header('Location: ?page=lobby');
 }
 Template::$content = Template::renderTemplate('newgame');

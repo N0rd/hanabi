@@ -28,6 +28,7 @@ Class Player {
   public static function getUserName($id) {
     $query = DB::$db->prepare('SELECT name FROM users WHERE id = :id');
     $query->bindParam(':id', $id);
+    $query->execute();
     if($name = $query->fetch()) {
       return $name['name'];
     }
