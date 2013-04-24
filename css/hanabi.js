@@ -140,7 +140,9 @@ function showActions(actions) {
 
 function addToLog(log) {
   var newLogDiv = $('<div class="logmessage"></div>').html(log);
-	$('#logandchat').prepend(newLogDiv);
+	if (log) {
+		$('#logandchat').prepend(newLogDiv);
+	}
 }
 
 function memoClick(input) {
