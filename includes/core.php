@@ -3,9 +3,9 @@ define('DEBUG', '1');
 session_start();
 require('includes/db.php');
 require('includes/template.php');
-require('includes/Game.class.php');
-require('includes/Deck.class.php');
-require('includes/Player.class.php');
+require('includes/game.class.php');
+require('includes/deck.class.php');
+require('includes/player.class.php');
 
 //DEBUG Tools:
 if(DEBUG) {
