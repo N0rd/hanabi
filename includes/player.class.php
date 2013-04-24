@@ -4,33 +4,85 @@ Class Player {
   private $game;
   public $id; 
   public $hand;
+  public $info;
   public $name;
   public $playerplace;
   public $current;
   
-  public function __construct($game, $id, $name, $playerplace, $hand = array(), $current = false) {
-    $this->game = $game;
+  public function __construct($game, $id, $name = '', $playerplace = null, $hand = array(), $info = array(), $current = false) {
     $this->id = $id;
-    $this->hand = $hand;
-    $this->name = $name;
-    $this->playerplace = $playerplace;
-    $this->current = $current;
+    if(is_object($game)) {
+      $this->game = $game;
+      $this->hand = $hand;
+      $this->info = $info;
+      $this->name = $name;
+      $this->playerplace = $playerplace;
+      $this->current = $current;
+    } else {
+      $this->game = new Game();
+      $this->game->id = $game;
+      $this->loadFromDb();
+    }
   }
   
-  public function saveToDb($insert) {
+  public function saveToDb($insert = false) {
     if($insert) {
-      $query = DB::$db->prepare('INSERT INTO game_player(gameid, playerid, `order`, hand)
-                                 VALUES (:gameid, :playerid, :order, :hand)');
+      $query = DB::$db->prepare('INSERT INTO game_player(gameid, playerid, `order`, hand, info)
+                                 VALUES (:gameid, :playerid, :order, :hand, :info)');
       $query->bindParam(':order', $this->playerplace);
     } else {
       //this might require tweaking later, when there will be a lobby with open games (possibly, players added or removed on update)
-      $query = DB::$db->prepare('UPDATE game_player SET hand = :hand WHERE gameid = :gameid AND playerid = :playerid');
+      $query = DB::$db->prepare('UPDATE game_player SET hand = :hand, info = :info WHERE gameid = :gameid AND playerid = :playerid');
     }
     $query->bindParam(':gameid', $this->game->id);
     $query->bindParam(':playerid', $this->id);
     $hand = json_encode($this->hand);
     $query->bindParam(':hand', $hand);
+    $info = json_encode($this->info);
+    $query->bindParam(':info', $info);
     $query->execute();
+  }
+  
+  public function loadFromDb() {
+    $query = DB::$db->prepare('SELECT hand, info FROM game_player WHERE gameid = :gameid AND playerid = :playerid');
+    $query->bindParam(':gameid', $this->game->id);
+    $query->bindParam(':playerid', $this->id);
+    $query->execute();
+    if($player = $query->fetch()) {
+      $this->hand = json_decode($player['hand']);
+      $this->info = Player::decodeInfo($player['info']);
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  public static function decodeInfo($info) {
+    $info = json_decode($info);
+    foreach($info as &$i) {
+      $i = get_object_vars($i);
+    }
+    return $info;
+  }
+  
+  public function setInfo($card, $info) {
+    if(isset($this->info[$card][$info])) {
+      $current = $this->info[$card][$info];
+    } else {
+      $current = 'unk';
+    }
+    if($current == 'yes' || $current == 'not') {
+      return false;
+    } else {
+      if($current == 'unk') {
+        $this->info[$card][$info] = 'thn';
+      } else if($current == 'thn') {
+        $this->info[$card][$info] = 'thy';
+      } else {
+        $this->info[$card][$info] = 'unk';
+      }
+      return $this->info[$card][$info];
+    }
   }
   
   public function draw($initial = false) {
@@ -111,14 +163,19 @@ Class Player {
       if(is_numeric($hint)) {
         if($hint == Deck::getCardNumber($card)) {
           $match[] = $place;
+          $this->info[$place][$hint] = 'yes';
+        } else {
+          $this->info[$place][$hint] = 'not';
         }
       } else {
         if($hint == Deck::getCardColor($card)) {
           $match[] = $place;
+          $this->info[$place][$hint] = 'yes';
+        } else {
+          $this->info[$place][$hint] = 'not';
         }
       }
     }
     $this->game->log(array('event' => 'hint', 'player' => $source->id, 'receiver' => $this->id, 'match' => $match, 'hint' => $hint));
   }
-  
 }

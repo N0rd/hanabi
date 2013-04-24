@@ -24,7 +24,8 @@ CREATE TABLE IF NOT EXISTS `game_player` (
   `gameid` int(11) unsigned NOT NULL,
   `playerid` int(11) unsigned NOT NULL,
   `order` tinyint(1) unsigned NOT NULL,
-  `hand` text CHARACTER SET utf8 NOT NULL,
+  `hand` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
+  `info` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `game_player` (`gameid`,`playerid`),
   KEY `gameid` (`gameid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
