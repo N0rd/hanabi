@@ -9,12 +9,12 @@ Class Player {
   public $playerplace;
   public $current;
   
-  public function __construct($game, $id, $playerplace = null, $hand = array(), $info = array(), $current = false) {
+  public function __construct($game, $id, $playerplace = null, $hand = '', $info = '', $current = false) {
     $this->id = $id;
     if(is_object($game)) {
       $this->game = $game;
-      $this->hand = $hand;
-      $this->info = $info;
+      $this->hand = json_decode($hand);
+      $this->info = object_to_array($info);
       $this->playerplace = $playerplace;
       $this->current = $current;
     } else {
@@ -22,6 +22,8 @@ Class Player {
       $this->game->id = $game;
       $this->loadFromDb();
     }
+    //temporary
+    $this->name = Player::getUserName($this->id);
   }
   
   //this will be cached in session later
@@ -60,19 +62,11 @@ Class Player {
     $query->execute();
     if($player = $query->fetch()) {
       $this->hand = json_decode($player['hand']);
-      $this->info = Player::decodeInfo($player['info']);
+      $this->info = object_to_array($player['info']);
       return true;
     } else {
       return false;
     }
-  }
-  
-  public static function decodeInfo($info) {
-    $info = json_decode($info);
-    foreach($info as &$i) {
-      $i = get_object_vars($i);
-    }
-    return $info;
   }
   
   public function setInfo($card, $info) {

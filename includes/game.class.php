@@ -48,12 +48,14 @@ Class Game {
   }
   
   public function start() {
+    $this->status = 1;
     // ezt itt muszáj volt átírni, egyesével osszuk a lapot a játékosoknak :)
     for($i = 0; $i < $this->handsize; $i++) {
       foreach($this->players as $p) {
         $p->draw(true);
       }
     }
+    $this->saveToDb();
   }
   
   public function addplayer($playerid, $playerplace = null) {
@@ -68,6 +70,9 @@ Class Game {
       }
     }
     $this->players[] = new Player($this, $playerid, $playerplace);
+    if(count($this->players) == $this->playersnum) {
+      $this->start();
+    }
     return true;
   }
   
@@ -155,11 +160,8 @@ Class Game {
       $query->bindParam(':id', $id);
       $query->execute();
       while($p = $query->fetch()) {
-        $hand = json_decode($p['hand']);
-        $info = Player::decodeInfo($p['info']);
-        //later, name will be loaded from users table
         $current = ($p['order'] == $this->currentplayer);
-        $this->players[] = new Player($this, $p['playerid'], $p['order'], $hand, $info, $current);
+        $this->players[] = new Player($this, $p['playerid'], $p['order'], $p['hand'], $p['info'], $current);
       }
       return true;
     } else {
@@ -168,9 +170,8 @@ Class Game {
   }
   
   public function action($action, $param1 = null, $param2 = null) {
-    if($_SESSION['user']['id'] != $this->players[$this->currentplayer]->id) {
-      //disabled for initial testing
-      //return false;
+    if(get_user_id() != $this->players[$this->currentplayer]->id) {
+      return array('error' => 'Nem te vagy soron!');
     }
     $output = $this->players[$this->currentplayer]->action($action, $param1, $param2);
     $this->nextPlayer();

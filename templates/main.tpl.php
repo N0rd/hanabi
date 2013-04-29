@@ -1,14 +1,14 @@
 <div id="firstline">
 	<div id="own">
-    <h2 id="ownname" class="element"><?php echo $game->players[$game->currentplayer]->name; ?></h2>
+    <h2 id="ownname" class="element"><?php echo Player::getUserName(get_user_id()); ?></h2>
     <div id="ownhand" class="actionbox">
       <?php echo $gamerender['ownhand']; ?>
     </div>
     <div id="actionhints" class="actionbox" style="display: none;">
     <?php foreach($game->players as $player) { 
-			//if ($player->id != $game->players[$game->currentplayer]->id) { ?>
+			if ($player->id != get_user_id()) { ?>
         <input class="toplayer" type="button" value="<?php echo $player->name; ?>" data-playerplace="<?php echo $player->playerplace; ?>" />
-      <?php 	// amíg tesztelünk, nem kell}
+      <?php }
 		} ?>
       <div class="linebrake">&nbsp;</div>
     </div>

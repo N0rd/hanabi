@@ -6,17 +6,19 @@ function submitAction(action, param1, param2) {
     type: 'post',
     dataType: 'json',
     success: function(output) {
-      console.log(output);
       /*debug*/
-      currentPlayerName = output.debug.players[output.debug.currentplayer].name;
-      setOwnTitle(output.debug.players[output.debug.currentplayer].name);
-      if(output.refresh) {
-        for(element in output.refresh) {
-          refreshElement(element, output.refresh[element]);
+      console.log(output);
+      if(output.output.error) {
+        alert(output.output.error);
+      } else {
+        if(output.refresh) {
+          for(element in output.refresh) {
+            refreshElement(element, output.refresh[element]);
+          }
         }
-      }
-      if(output.logs) {
-        addToLog(output.logs);
+        if(output.logs) {
+          addToLog(output.logs);
+        }
       }
     }
   });

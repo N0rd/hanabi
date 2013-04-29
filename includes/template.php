@@ -18,11 +18,13 @@ Class Template {
       case 'lives': return Template::renderTemplate('lives', array('available' => $game->lives, 'used' => $game->getMaxLives() - $game->lives));
       case 'discard': return Template::renderTemplate('discard', array('discard' => $game->discard));
       case 'deckbox': return Template::renderTemplate('deckbox', array('size' => count($game->deck->cards)));		
-      case 'ownhand': return Template::renderTemplate('ownhand', array('player' => /*debug*/ $game->players[$game->currentplayer], 'keys' => $game->getInfoKeys()));
+      case 'ownhand': return Template::renderTemplate('ownhand', array('player' => $game->getPlayerById(get_user_id()), 'keys' => $game->getInfoKeys()));
       case 'players':
         $output = '';
         foreach($game->players as $player) {
-          $output .= Template::renderTemplate('hand', array('player' => $player));
+          if($player->id != get_user_id()) {
+            $output .= Template::renderTemplate('hand', array('player' => $player));
+          }
         }
         return $output;
       default: return '';
