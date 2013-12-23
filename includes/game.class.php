@@ -148,12 +148,8 @@ Class Game {
       $this->hints = $game['hints'];
       $deck = json_decode($game['deck']);
       $this->deck = new Deck($deck);
-      $this->builtpiles = get_object_vars(json_decode($game['builtpiles']));
-      if(is_object($this->discard)){
-        $this->discard = get_object_vars(json_decode($game['discard']));
-      } else {
-        $this->discard = array();
-      }
+      $this->builtpiles = json_decode($game['builtpiles'], true);
+      $this->discard = json_decode($game['discard'], true);
       $this->colors = Deck::getColorsByVariant($this->variant);
       $this->getMaxHints();
       $query = DB::$db->prepare('SELECT * FROM game_player WHERE gameid = :id ORDER BY `order`');

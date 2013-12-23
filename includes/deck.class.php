@@ -79,20 +79,20 @@ Class Deck {
   }
   
   public function build($variant) {
-  $this->cards = array();
-	$colors = Deck::getColorsByVariant($variant);
-  if ($variant == 'harder') {
-    $num = Deck::$numbersHarder;
-  } else {
-    $num = Deck::$numbers;
-  }
-  foreach($colors as $cid => $c) {
-    if ($variant == 'harder' && $cid == 'P') {
+    $this->cards = array();
+    $colors = Deck::getColorsByVariant($variant);
+    if ($variant == 'harder') {
       $num = Deck::$numbersHarder;
     } else {
       $num = Deck::$numbers;
     }
-    foreach($num as $n => $p) {
+    foreach($colors as $cid => $c) {
+      if ($variant == 'harder' && $cid == 'P') {
+        $num = Deck::$numbersHarder;
+      } else {
+        $num = Deck::$numbers;
+      }
+      foreach($num as $n => $p) {
         for($i = 1; $i <= $p; $i++) {
           $this->cards[] = $cid.$n;
         }

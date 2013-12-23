@@ -14,7 +14,7 @@ Class Player {
     if(is_object($game)) {
       $this->game = $game;
       $this->hand = json_decode($hand);
-      $this->info = object_to_array($info);
+      $this->info = json_decode($info, true);
       $this->playerplace = $playerplace;
       $this->current = $current;
     } else {
@@ -62,7 +62,7 @@ Class Player {
     $query->execute();
     if($player = $query->fetch()) {
       $this->hand = json_decode($player['hand']);
-      $this->info = object_to_array($player['info']);
+      $this->info = json_decode($player['info'], true);
       return true;
     } else {
       return false;

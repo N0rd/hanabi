@@ -32,19 +32,3 @@ function check_login() {
 function get_user_id() {
   return $_SESSION['user']['id'];
 }
-
-function object_to_array($obj) {
-  if(!$obj || $obj == 'null') {
-    return array();
-  }
-  $obj = json_decode($obj);
-  if(is_object($obj)) {
-    $obj = get_object_vars($obj);
-  }
-  foreach($obj as &$o) {
-    if(is_object($o)) {
-      $o = get_object_vars($o);
-    }
-  }
-  return $obj;
-}
