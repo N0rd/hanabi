@@ -4,3 +4,6 @@ includes/FirePHPCore/*
 _notes/*
 /*/_notes/*
 munkakepek/*
+.buildpath
+.project
+.settings/*
