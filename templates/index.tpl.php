@@ -4,7 +4,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Digitális Hanabi</title>
 <script type="text/javascript" src="css/jquery-1.9.1.min.js"></script>
+<?php if($page == 'main') { ?>
 <script type="text/javascript" src="css/hanabi.js"></script>
+<?php } ?>
+<?php if($page == 'newuser') { ?>
+<script type="text/javascript" src="css/register.js"></script>
+<?php } ?>
 <link href="css/hanabi.css" rel="stylesheet" type="text/css" />
 <link href="css/main.css" rel="stylesheet" type="text/css" />
 <link rel="icon" type="image/gif" href="images/icon.gif" />

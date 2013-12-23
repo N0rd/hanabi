@@ -43,52 +43,6 @@ $(document).ready(function(){
       $(this).addClass('selected');
     }
   });
-	$('#inputusername').on('keyup', function(){
-		if ($('#inputusername').val().length > 1){
-			$('#jsname').addClass('goodjs');
-			$('#inputemail').removeAttr('disabled');
-		}
-		else{
-			$('#jsname').removeClass('beforjs');
-			$('#jsname').removeClass('goodjs');
-		}		
-	});
-	$('#inputemail').on('keyup', function(){
-		if (/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]{2,})+$/.test($('#inputemail').val())){
-			$('#jsemail').addClass('goodjs');
-			$('#inputpassword1').removeAttr('disabled');
-		}
-		else{
-			$('#jsemail').removeClass('beforjs');
-			$('#jsemail').removeClass('goodjs');
-		}		
-	});
-	$('#inputpassword1').on('keyup', function(){
-		if ($('#inputpassword1').val().length > 4){
-			$('#jspass1').addClass('goodjs');
-			$('#inputpassword2').removeAttr('disabled');
-		}
-		else{
-			$('#jspass1').removeClass('beforjs');
-			$('#jspass1').removeClass('goodjs');
-		}		
-	});	
-	$('#inputpassword2').on('keyup', function(){
-		if ($('#inputpassword1').val() == $('#inputpassword2').val()){
-			$('#jspass2').addClass('goodjs');
-		}
-		else{
-			$('#jspass2').removeClass('beforjs');
-			$('#jspass2').removeClass('goodjs');
-		}		
-	});	
-	$('#inputreg').on('click', function(event){
-		if ($('.goodjs').length == 4) {
-			return true;
-		} else {
-			return false;
-		}		
-	});
 	$('.hintselector').on('mouseover', function(event){
 		var property = $(this).attr('id').substr(5,1);
 		var playerHand = '#player'+hintTargetPlayer+'hand';
@@ -117,6 +71,7 @@ $(document).ready(function(){
 		selectHintHint(hintdata.substr(5,1));
   });
   currentPlayerName = $('#ownname').html();
+  refreshGame();
 });
 
 function getSelectedCard() {
@@ -272,4 +227,8 @@ function selectHintHint(hint) {
 
 function newWindow() {
 	window.open('/phpmyadmin/','_blank');
+}
+
+function refreshGame() {
+  submitAction();
 }

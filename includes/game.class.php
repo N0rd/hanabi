@@ -16,7 +16,6 @@ Class Game {
   public $deck;
   public $builtpiles;
   public $discard;
-  public $log;
   public $newlog;
   
   public static $statusNames = array(
@@ -159,7 +158,7 @@ Class Game {
       $this->colors = Deck::getColorsByVariant($this->variant);
       $this->getMaxHints();
       $query = DB::$db->prepare('SELECT * FROM game_player WHERE gameid = :id ORDER BY `order`');
-      $query->bindParam(':id', $id);
+      $query->bindValue(':id', $id);
       $query->execute();
       while($p = $query->fetch()) {
         $current = ($p['order'] == $this->currentplayer);
@@ -168,6 +167,19 @@ Class Game {
       return true;
     } else {
       return false;
+    }
+  }
+  
+  public function loadLogs($lastid = 0) {
+    $query = DB::$db->prepare('SELECT id, event, playerid AS player, data FROM game_log WHERE gameid = :id AND id > :lastid ORDER BY id');
+    $query->bindValue(':id', $this->id);
+    $query->bindValue(':lastid', $lastid);
+    $query->execute();
+    while($l = $query->fetch()) {
+      $data = json_decode($l['data'], true);
+      unset($l['data']);
+      $l = array_merge($l, $data);
+      $this->newlog[] = $l;
     }
   }
   

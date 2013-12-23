@@ -9,7 +9,9 @@ if(!isset($_SESSION['currentgame'])) {
 } else {
   $game = new Game($_SESSION['currentgame']);
   if(!isset($_POST['action'])) {
+    $game->loadLogs();
     //We will return changes here without action
+    $output = array('success' => true, 'refresh' => array());
   } else {
     if(!isset($_POST['param1'])) {
       $_POST['param1'] = null;
