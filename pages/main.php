@@ -1,8 +1,10 @@
 <?php
 check_login();
 if(isset($_GET['id'])) {
-  //TODO: check if user is present in this game
   $game = new Game($_GET['id']);
+  if($game->status == 0 || !$game->hasPlayer($_SESSION['user']['id'])) {
+    header('Location: ?page=lobby');
+  }
 } else {
   header('Location: ?page=lobby');
 }

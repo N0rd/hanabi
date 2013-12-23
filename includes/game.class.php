@@ -64,7 +64,7 @@ Class Game {
     $this->saveToDb();
   }
   
-  public function addplayer($playerid, $playerplace = null) {
+  public function addPlayer($playerid, $playerplace = null) {
     if($playerplace == null) {
       $playerplace = count($this->players);
     }
@@ -276,4 +276,14 @@ Class Game {
     }
     return $keys;
   }
+  
+  public function hasPlayer($playerid) {
+    foreach($this->players as $player) {
+      if($player->id == $playerid) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
 }
