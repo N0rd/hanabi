@@ -4,7 +4,7 @@ check_login();
 //temporary game join code, later this will be in an ajax call, probably
 if(isset($_GET['action']) || isset($_GET['game'])) {
   $game = new Game($_GET['game']);
-  if($game->addPlayer($_SESSION['user']['id'])) {
+  if($game->addPlayer(get_user_id())) {
     $player = $game->players[count($game->players)-1];
     $player->saveToDb(true);
   }

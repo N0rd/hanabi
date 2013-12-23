@@ -2,7 +2,7 @@
 check_login();
 if(isset($_GET['id'])) {
   $game = new Game($_GET['id']);
-  if($game->status == 0 || !$game->hasPlayer($_SESSION['user']['id'])) {
+  if($game->status == 0 || !$game->hasPlayer(get_user_id())) {
     header('Location: ?page=lobby');
   }
 } else {

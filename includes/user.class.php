@@ -8,7 +8,7 @@ Class User {
     } else if(is_int($param)){
       $this->loadFromDB($param);
     } else if($param == 'current'){
-      $this->loadFromDB($_SESSION['user']['id']);
+      $this->loadFromDB(get_user_id());
     }
 
     else {

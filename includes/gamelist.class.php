@@ -10,7 +10,7 @@ Class GameList {
         $this->columns = array('name', 'playersnum', 'players');
         break;
       case 'current':
-        $this->playerid = $_SESSION['user']['id'];
+        $this->playerid = get_user_id();
         $this->statuses = array(0, 1);
         $this->url = '?page=main&id=';
         $this->columns = array('name', 'playersnum', 'players', 'status');  

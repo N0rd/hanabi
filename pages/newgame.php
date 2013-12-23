@@ -11,8 +11,8 @@ if(count($_POST)){
     $playersnum = 5;
   }
   $game = new Game(null, $_POST['name'], $playersnum);
-  $game->creator = $_SESSION['user']['id'];
-  $game->addplayer($_SESSION['user']['id']);
+  $game->creator = get_user_id();
+  $game->addplayer(get_user_id());
   $game->saveToDb();
   header('Location: ?page=lobby');
 }
