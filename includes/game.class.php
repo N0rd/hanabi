@@ -19,6 +19,12 @@ Class Game {
   public $log;
   public $newlog;
   
+  public static $statusNames = array(
+    0 => 'Játékosra vár',
+    1 => 'Folyamatban',
+    2 => 'Vége',
+  );
+  
   public function __construct($id = null, $name = '', $playersnum = 0) {
     if($id) {
       $this->loadFromDB($id);

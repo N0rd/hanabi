@@ -4,6 +4,7 @@ session_start();
 require('includes/db.php');
 require('includes/template.php');
 require('includes/game.class.php');
+require('includes/gamelist.class.php');
 require('includes/deck.class.php');
 require('includes/player.class.php');
 

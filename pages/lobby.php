@@ -11,11 +11,9 @@ if(isset($_GET['action']) || isset($_GET['game'])) {
   header('Location: ?page=lobby');  
 }
 
-$query = DB::$db->query('SELECT id FROM games WHERE status = 0');
-$query->execute();
-$games = array();
-while($game = $query->fetch()) {
-  $games[] = new Game($game['id']);
-}
+$newgames = new GameList('new');
+$newgames = $newgames->render();
+$currentgames = new GameList('current');
+$currentgames = $currentgames->render();
 
-Template::$content = Template::renderTemplate('lobby', array('games' => $games));
+Template::$content = Template::renderTemplate('lobby', array('newgames' => $newgames, 'currentgames' => $currentgames));
